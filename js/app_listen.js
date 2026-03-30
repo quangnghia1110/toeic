@@ -454,19 +454,41 @@ function startListenFill(testKey, part) {
   const data = listenFillData[testKey];
   if (!data) return;
 
-  let screens = []; // each screen is { sentences: [{data, part, idx}, ...], isGroup: bool }
+  let screens = []; // each screen is { sentences: [{data, part, idx}, ...], isGroup: bool, mcqs?: [] }
+  const testData = listenTests[testKey];
   function addPart(partKey) {
     const partData = data[partKey];
     if (!partData) return;
     const groupsKey = partKey + 'Groups';
     const groups = data[groupsKey];
     if ((partKey === 'part3' || partKey === 'part4') && groups) {
-      // Group sentences by passage
+      // Group sentences by passage + attach MCQ questions
       const allSentences = partData.map((s, i) => ({ data: s, part: partKey, idx: i }));
       const grouped = groupFillSentences(allSentences, groups);
-      grouped.forEach(g => screens.push({ sentences: g, isGroup: true }));
+      const mcqGroups = testData && testData[partKey] ? testData[partKey] : [];
+      grouped.forEach((g, gi) => {
+        const mcqs = mcqGroups[gi] ? mcqGroups[gi].questions.map(q => ({
+          id: q.id, question: q.question, options: q.options, answer: q.answer,
+          questionVi: q.questionVi || '', optionsVi: q.optionsVi || []
+        })) : [];
+        screens.push({ sentences: g, isGroup: true, mcqs: mcqs });
+      });
+    } else if (partKey === 'part1' && testData && testData.part1) {
+      // Part 1: each screen = 1 fill sentence + 1 MCQ (choose correct picture description)
+      partData.forEach((s, i) => {
+        const q = testData.part1[i];
+        const mcqs = q ? [{ id: q.id, question: 'Choose the correct description:', options: q.options, answer: q.answer, questionVi: q.questionVi || '', optionsVi: q.optionsVi || [] }] : [];
+        screens.push({ sentences: [{ data: s, part: partKey, idx: i }], isGroup: false, mcqs: mcqs });
+      });
+    } else if (partKey === 'part2' && testData && testData.part2) {
+      // Part 2: each screen = 1 fill sentence + 1 MCQ (choose correct response)
+      partData.forEach((s, i) => {
+        const q = testData.part2[i];
+        const mcqs = q ? [{ id: q.id, question: q.question, options: q.options, answer: q.answer, questionVi: q.questionVi || '', optionsVi: q.optionsVi || [] }] : [];
+        screens.push({ sentences: [{ data: s, part: partKey, idx: i }], isGroup: false, mcqs: mcqs });
+      });
     } else {
-      // One sentence per screen (part1/part2)
+      // Fallback: one sentence per screen, no MCQ
       partData.forEach((s, i) => screens.push({ sentences: [{ data: s, part: partKey, idx: i }], isGroup: false }));
     }
   }
@@ -668,6 +690,38 @@ function renderFillSentence() {
     }
   });
 
+  // Render MCQ questions for Part 3/4
+  const mcqs = screen.mcqs || [];
+  if (mcqs.length > 0) {
+    if (!fillState._mcqAnswers) fillState._mcqAnswers = {};
+    const screenKey = fillState.currentIdx;
+    if (!fillState._mcqAnswers[screenKey]) fillState._mcqAnswers[screenKey] = {};
+
+    html += '<div class="fill-mcq-section">';
+    const letters = ['A', 'B', 'C', 'D'];
+    mcqs.forEach((q, qi) => {
+      html += `<div class="fill-mcq-question">`;
+      html += `<div class="fill-mcq-qtext"><span class="fill-mcq-qnum">${q.id}.</span> ${q.question}</div>`;
+      html += `<div class="fill-mcq-options">`;
+      q.options.forEach((opt, oi) => {
+        const userAns = fillState._mcqAnswers[screenKey][qi];
+        let cls = 'fill-mcq-opt';
+        if (fillState.checked) {
+          cls += ' disabled';
+          if (oi === q.answer) cls += ' correct';
+          else if (userAns === oi) cls += ' wrong';
+        } else if (userAns === oi) {
+          cls += ' selected';
+        }
+        html += `<div class="${cls}" onclick="selectFillMcq(${qi},${oi})">`;
+        html += `<span class="fill-mcq-letter">${letters[oi]}</span> ${opt}`;
+        html += `</div>`;
+      });
+      html += `</div></div>`;
+    });
+    html += '</div>';
+  }
+
   sentenceEl.innerHTML = html;
 
   // Translation hidden - only shows after check in answer section
@@ -699,6 +753,27 @@ function renderFillSentence() {
     allParsed.forEach((parsed, sIdx) => {
       answerHtml += `<div class="fill-answer-text" style="${isGroup && sIdx > 0 ? 'margin-top:4px;' : ''}">${parsed.translation.replace(/\n/g, '<br>')}</div>`;
     });
+
+    // MCQ question/option translations from data
+    if (mcqs.length > 0) {
+      const letters = ['A', 'B', 'C', 'D'];
+      answerHtml += '<div class="fill-answer-label" style="margin-top:14px;">Questions:</div>';
+      mcqs.forEach(q => {
+        answerHtml += `<div class="fill-mcq-answer-block">`;
+        answerHtml += `<div class="fill-mcq-answer-q"><b>${q.id}.</b> ${q.question}</div>`;
+        if (q.questionVi) answerHtml += `<div class="fill-mcq-answer-qvi">${q.questionVi}</div>`;
+        q.options.forEach((opt, oi) => {
+          const isCorrect = oi === q.answer;
+          const optVi = q.optionsVi && q.optionsVi[oi] ? q.optionsVi[oi] : '';
+          answerHtml += `<div class="fill-mcq-answer-opt${isCorrect ? ' correct' : ''}">`;
+          answerHtml += `<span class="fill-mcq-letter">${letters[oi]}</span> ${opt}`;
+          if (optVi) answerHtml += ` <span class="fill-mcq-answer-optvi">— ${optVi}</span>`;
+          answerHtml += `</div>`;
+        });
+        answerHtml += `</div>`;
+      });
+    }
+
     answerHtml += `<div class="fill-score">${correctCount}/${totalBlanks} correct</div>`;
     answerHtml += '</div>';
 
@@ -747,6 +822,22 @@ function setupFillKeyboard() {
       }
     });
   });
+}
+
+function selectFillMcq(qi, oi) {
+  if (fillState.checked) return;
+  const screenKey = fillState.currentIdx;
+  if (!fillState._mcqAnswers) fillState._mcqAnswers = {};
+  if (!fillState._mcqAnswers[screenKey]) fillState._mcqAnswers[screenKey] = {};
+  fillState._mcqAnswers[screenKey][qi] = oi;
+  // Update UI without full re-render
+  const questions = document.querySelectorAll('.fill-mcq-question');
+  if (questions[qi]) {
+    const opts = questions[qi].querySelectorAll('.fill-mcq-opt');
+    opts.forEach((el, i) => {
+      el.classList.toggle('selected', i === oi);
+    });
+  }
 }
 
 function checkFill() {

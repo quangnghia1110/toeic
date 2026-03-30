@@ -20,6 +20,7 @@ const listenTests = {
           "She's wiping off a bench.",
           "She's throwing away a plate."
         ],
+        optionsVi: ["Cô ấy đang ăn trong khu dã ngoại.", "Cô ấy đang đợi xếp hàng tại xe bán đồ ăn.", "Cô ấy đang lau ghế dài.", "Cô ấy đang vứt đĩa đi."],
         answer: -1
       },
       {
@@ -30,6 +31,7 @@ const listenTests = {
           "The man is shoveling snow from a walkway.",
           "The man is running through the snow."
         ],
+        optionsVi: ["Người đàn ông đang phủi tuyết khỏi nóc xe.", "Người đàn ông đang đứng trong tuyết bên cạnh xe.", "Người đàn ông đang xúc tuyết khỏi lối đi.", "Người đàn ông đang chạy qua tuyết."],
         answer: -1
       },
       {
@@ -40,6 +42,7 @@ const listenTests = {
           "One of the men is rearranging cushions on a sofa.",
           "One of the men is painting a picture."
         ],
+        optionsVi: ["Một số công nhân đang treo tranh trong phòng triển lãm.", "Hai người đang nói chuyện.", "Một người đàn ông đang sắp xếp lại đệm trên sofa.", "Một người đàn ông đang vẽ tranh."],
         answer: -1
       },
       {
@@ -50,6 +53,7 @@ const listenTests = {
           "Empty racks are lined up next to a building.",
           "Clothing is being displayed under a tent."
         ],
+        optionsVi: ["Xe cộ đang đi vào bãi đậu xe.", "Móc quần áo nằm rải rác trên mặt đất.", "Các giá trống xếp hàng bên cạnh tòa nhà.", "Quần áo đang được trưng bày dưới lều."],
         answer: -1
       },
       {
@@ -60,6 +64,7 @@ const listenTests = {
           "A computer station has been set up on a desk.",
           "A rug has been rolled up against a wall."
         ],
+        optionsVi: ["Cây trồng trong chậu được treo từ trần nhà.", "Ghế được xếp chồng trước lối vào.", "Máy tính đã được lắp đặt trên bàn.", "Tấm thảm được cuộn lại dựa vào tường."],
         answer: -1
       },
       {
@@ -70,6 +75,7 @@ const listenTests = {
           "A door has been taken off its frame.",
           "A light fixture has been left on the ground."
         ],
+        optionsVi: ["Một người đàn ông đang quét sân.", "Một người đàn ông đang thay sàn.", "Cánh cửa đã được tháo khỏi khung.", "Đèn bị để dưới đất."],
         answer: -1
       }
     ],
@@ -78,31 +84,37 @@ const listenTests = {
       {
         id: 7,
         question: "How old is this building?",
+        questionVi: "Tòa nhà này bao nhiêu tuổi?",
         options: [
           "To ship some materials.",
           "About ten years old.",
           "Company offices, I think."
         ],
+        optionsVi: ["Để vận chuyển vật liệu.", "Khoảng mười năm tuổi.", "Văn phòng công ty, tôi nghĩ vậy."],
         answer: 1
       },
       {
         id: 8,
         question: "Can you come to my jazz performance tonight?",
+        questionVi: "Bạn có thể đến buổi biểu diễn jazz tối nay không?",
         options: [
           "I'm sorry I was late for the meeting.",
           "Mostly just local musicians.",
           "Sure, I'll be there!"
         ],
+        optionsVi: ["Tôi xin lỗi vì đến muộn cuộc họp.", "Chủ yếu là nhạc sĩ địa phương.", "Chắc chắn, tôi sẽ có mặt!"],
         answer: 2
       },
       {
         id: 9,
         question: "Which apartment submitted a work order?",
+        questionVi: "Căn hộ nào đã gửi yêu cầu sửa chữa?",
         options: [
           "It's what you did for a living.",
           "Submit your assignment here.",
           "It came from the tenants in B23."
         ],
+        optionsVi: ["Đó là công việc bạn làm để kiếm sống.", "Nộp bài tập ở đây.", "Từ người thuê ở B23."],
         answer: 2
       },
       {
@@ -113,6 +125,8 @@ const listenTests = {
           "An e-mail receipt.",
           "Could I get change for a dollar?"
         ],
+        questionVi: "Bạn sẽ liên hệ nhà cung cấp về việc thay đổi ngày giao hàng chứ?",
+        optionsVi: ["Tất nhiên, tôi sẽ lo.","Biên nhận email.","Tôi đổi một đô la được không?"],
         answer: 0
       },
       {
@@ -123,6 +137,8 @@ const listenTests = {
           "From three o'clock until four.",
           "Because a light needed to be fixed."
         ],
+        questionVi: "Tại sao nhân viên bảo trì lại ở đây?",
+        optionsVi: ["Không, anh ấy không.","Từ ba giờ đến bốn giờ.","Vì một bóng đèn cần được sửa."],
         answer: 2
       },
       {
@@ -133,6 +149,8 @@ const listenTests = {
           "The personnel department.",
           "Yes, they chose Jacob Borgman."
         ],
+        questionVi: "Ban quản lý đã đưa ra quyết định tuyển dụng chưa?",
+        optionsVi: ["Đặt nó lên kệ cao nhất.","Phòng nhân sự.","Rồi, họ đã chọn Jacob Borgman."],
         answer: 2
       },
       {
@@ -143,6 +161,8 @@ const listenTests = {
           "Well, maybe a sandwich.",
           "Let's eat here."
         ],
+        questionVi: "Bạn muốn ăn ở căng tin hay ra ngoài?",
+        optionsVi: ["Anh ấy đến đó hôm qua.","Ừ, có lẽ một chiếc bánh mì.","Ăn ở đây đi."],
         answer: 2
       },
       {
@@ -153,6 +173,8 @@ const listenTests = {
           "No, I'll send it now.",
           "Check the employee manual."
         ],
+        questionVi: "Bạn đã gửi email hợp đồng lao động cho ông Patel hôm qua chưa?",
+        optionsVi: ["Vâng, tôi đồng ý.","Chưa, tôi sẽ gửi ngay.","Kiểm tra sổ tay nhân viên."],
         answer: 1
       },
       {
@@ -163,6 +185,8 @@ const listenTests = {
           "Sure, I like salad.",
           "At the end of this corridor."
         ],
+        questionVi: "Buổi dã ngoại của bộ phận là thứ Bảy này, đúng không?",
+        optionsVi: ["Dự báo có nhiều mưa.","Chắc chắn, tôi thích salad.","Ở cuối hành lang này."],
         answer: 0
       },
       {
@@ -173,6 +197,8 @@ const listenTests = {
           "For a few dollars more.",
           "A fifteen-minute break."
         ],
+        questionVi: "Bạn muốn cà phê hay trà?",
+        optionsVi: ["Chỉ cần nước, xin cảm ơn.","Thêm vài đô la nữa.","Nghỉ mười lăm phút."],
         answer: 0
       },
       {
@@ -183,6 +209,8 @@ const listenTests = {
           "A few times a day.",
           "To the end of April."
         ],
+        questionVi: "Chúng ta đã đạt mục tiêu doanh số tháng này.",
+        optionsVi: ["Tin tuyệt vời!","Vài lần một ngày.","Đến cuối tháng Tư."],
         answer: 0
       },
       {
@@ -193,6 +221,8 @@ const listenTests = {
           "Yes, I did find one.",
           "About once a month."
         ],
+        questionVi: "Bạn đi công tác thường xuyên như thế nào?",
+        optionsVi: ["Kết quả tốt.","Vâng, tôi đã tìm được.","Khoảng mỗi tháng một lần."],
         answer: 2
       },
       {
@@ -203,6 +233,8 @@ const listenTests = {
           "I didn't bring boots.",
           "At the visitors' center."
         ],
+        questionVi: "Chúng ta nên đi bộ đường mòn Wildflower hôm nay.",
+        optionsVi: ["Ghế này trống.","Tôi không mang giày ống.","Ở trung tâm du khách."],
         answer: 1
       },
       {
@@ -213,6 +245,8 @@ const listenTests = {
           "He usually takes the train.",
           "Yes, I made a reservation last week."
         ],
+        questionVi: "Bạn đã đặt khách sạn ở London rồi, phải không?",
+        optionsVi: ["Rất thú vị, cảm ơn.","Anh ấy thường đi tàu.","Vâng, tôi đã đặt chỗ tuần trước."],
         answer: 2
       },
       {
@@ -223,6 +257,8 @@ const listenTests = {
           "He's a concert violinist.",
           "They already left."
         ],
+        questionVi: "Còn vé nào cho buổi hòa nhạc tối nay không?",
+        optionsVi: ["Đã bán hết.","Anh ấy là nghệ sĩ violin.","Họ đã rời đi rồi."],
         answer: 0
       },
       {
@@ -233,6 +269,8 @@ const listenTests = {
           "I haven't had the chance.",
           "About 40 dollars."
         ],
+        questionVi: "Bạn chưa sử dụng phần mềm này trước đây à?",
+        optionsVi: ["Tôi ghi order cho bạn nhé?","Tôi chưa có dịp.","Khoảng 40 đô la."],
         answer: 1
       },
       {
@@ -243,6 +281,8 @@ const listenTests = {
           "In the kitchen cabinet.",
           "The prototype is still being tested."
         ],
+        questionVi: "Khi nào máy xay sinh tố mới sẽ được ra mắt?",
+        optionsVi: ["Chỉ với trái cây và rau.","Trong tủ bếp.","Mẫu thử vẫn đang được kiểm tra."],
         answer: 2
       },
       {
@@ -253,6 +293,8 @@ const listenTests = {
           "At terminal 2.",
           "It's a marketing position."
         ],
+        questionVi: "Ai sẽ đón khách hàng ở sân bay?",
+        optionsVi: ["Họ quyết định tự lái xe.","Ở nhà ga 2.","Đó là vị trí marketing."],
         answer: 0
       },
       {
@@ -263,6 +305,8 @@ const listenTests = {
           "No, I didn't check out the sale.",
           "I needed some for a large bouquet."
         ],
+        questionVi: "Những bông hồng đỏ đến sáng nay ở đâu?",
+        optionsVi: ["Khoảng ba lít nước.","Không, tôi không xem đợt giảm giá.","Tôi cần một ít cho bó hoa lớn."],
         answer: 2
       },
       {
@@ -273,6 +317,8 @@ const listenTests = {
           "After the announcement.",
           "He made a great speech."
         ],
+        questionVi: "Bộ phim đã được đề cử cho nhiều giải thưởng.",
+        optionsVi: ["Sao mình không đi xem?","Sau thông báo.","Anh ấy đã phát biểu tuyệt vời."],
         answer: 0
       },
       {
@@ -283,6 +329,8 @@ const listenTests = {
           "Clara's already organizing one.",
           "It's a very interesting article."
         ],
+        questionVi: "Ai quan tâm đến việc bắt đầu chương trình đi chung xe?",
+        optionsVi: ["Cảm ơn, nhưng tôi không biết bơi.","Clara đang tổ chức rồi.","Đó là bài báo rất thú vị."],
         answer: 1
       },
       {
@@ -293,6 +341,8 @@ const listenTests = {
           "Five to seven months.",
           "Yes, it's a beautiful building."
         ],
+        questionVi: "Tôi sẽ dạy hội thảo ở đâu tháng này?",
+        optionsVi: ["Chúng tôi vừa gửi email cho tất cả giảng viên.","Năm đến bảy tháng.","Vâng, đó là tòa nhà đẹp."],
         answer: 0
       },
       {
@@ -303,6 +353,8 @@ const listenTests = {
           "Yes, they come in other colors.",
           "Our spring merchandise is arriving soon."
         ],
+        questionVi: "Tại sao chúng ta chuyển áo len ra phía sau cửa hàng?",
+        optionsVi: ["Ở trung tâm mua sắm mới.","Vâng, chúng có màu khác.","Hàng hóa mùa xuân sắp đến."],
         answer: 2
       },
       {
@@ -313,6 +365,8 @@ const listenTests = {
           "A contact lens prescription.",
           "I have very limited time."
         ],
+        questionVi: "Bạn có muốn làm một số hợp đồng này không?",
+        optionsVi: ["Cảm ơn đã gặp tôi.","Đơn thuốc kính áp tròng.","Tôi rất ít thời gian."],
         answer: 2
       },
       {
@@ -323,6 +377,8 @@ const listenTests = {
           "I really like working with computers.",
           "Just a r\u00e9sum\u00e9 is needed."
         ],
+        questionVi: "Bạn đang tìm loại công việc gì?",
+        optionsVi: ["Không, lúc 10 giờ sáng.","Tôi rất thích làm việc với máy tính.","Chỉ cần một bản lý lịch."],
         answer: 1
       }
     ],
@@ -335,18 +391,24 @@ const listenTests = {
             id: 32,
             question: "What event does the woman mention?",
             options: ["A job fair", "A cooking class", "A fund-raiser", "A company picnic"],
+            questionVi: "Người phụ nữ đề cập đến sự kiện gì?",
+            optionsVi: ["Hội chợ việc làm","Lớp nấu ăn","Gây quỹ","Tiệc công ty"],
             answer: 3
           },
           {
             id: 33,
             question: "What does the woman ask for?",
             options: ["A guest list", "A dessert recipe", "A business card", "A promotional code"],
+            questionVi: "Người phụ nữ yêu cầu gì?",
+            optionsVi: ["Danh sách khách mời","Công thức món tráng miệng","Danh thiếp","Mã khuyến mãi"],
             answer: 1
           },
           {
             id: 34,
             question: "What does the man recommend doing?",
             options: ["Returning some merchandise", "Watching a video", "Creating an account", "Reading a review"],
+            questionVi: "Người đàn ông khuyên làm gì?",
+            optionsVi: ["Trả lại hàng hóa","Xem video","Tạo tài khoản","Đọc đánh giá"],
             answer: 1
           }
         ]
@@ -358,18 +420,24 @@ const listenTests = {
             id: 35,
             question: "What department do the speakers most likely work in?",
             options: ["Accounting", "Research and development", "Maintenance", "Marketing"],
+            questionVi: "Những người nói có thể làm ở bộ phận nào?",
+            optionsVi: ["Kế toán","Nghiên cứu và phát triển","Bảo trì","Marketing"],
             answer: 0
           },
           {
             id: 36,
             question: "What problem does the woman mention?",
             options: ["A report has not been submitted.", "An invoice is not accurate.", "A policy has not been followed.", "An order has not been delivered."],
+            questionVi: "Người phụ nữ đề cập vấn đề gì?",
+            optionsVi: ["Báo cáo chưa được nộp.","Hóa đơn không chính xác.","Chính sách chưa được tuân thủ.","Đơn hàng chưa được giao."],
             answer: 2
           },
           {
             id: 37,
             question: "What does the man say he will do?",
             options: ["Delete an electronic file", "Authorize a reimbursement", "Set up a sales meeting", "Review a spreadsheet"],
+            questionVi: "Người đàn ông nói sẽ làm gì?",
+            optionsVi: ["Xóa file điện tử","Phê duyệt hoàn tiền","Lên lịch họp bán hàng","Xem bảng tính"],
             answer: 1
           }
         ]
@@ -381,18 +449,24 @@ const listenTests = {
             id: 38,
             question: "What industry do the speakers most likely work in?",
             options: ["Shipping", "Manufacturing", "Hospitality", "Meteorology"],
+            questionVi: "Những người nói có thể làm trong ngành nào?",
+            optionsVi: ["Vận tải biển","Sản xuất","Khách sạn","Khí tượng"],
             answer: 0
           },
           {
             id: 39,
             question: "What is the reason for a delay?",
             options: ["A schedule was written incorrectly.", "Some equipment is not properly set up.", "Weather conditions are poor.", "Several staff members are absent."],
+            questionVi: "Lý do chậm trễ là gì?",
+            optionsVi: ["Lịch trình bị viết sai.","Thiết bị chưa được lắp đặt đúng.","Thời tiết xấu.","Nhiều nhân viên vắng mặt."],
             answer: 2
           },
           {
             id: 40,
             question: "What does the man say he will do?",
             options: ["Update a shift schedule", "Clear a work space", "Complete a checklist", "Place a call"],
+            questionVi: "Người đàn ông nói sẽ làm gì?",
+            optionsVi: ["Cập nhật lịch ca làm","Dọn dẹp không gian làm việc","Hoàn thành danh sách kiểm tra","Gọi điện thoại"],
             answer: 3
           }
         ]
@@ -404,18 +478,24 @@ const listenTests = {
             id: 41,
             question: "Why is the woman at the restaurant?",
             options: ["To celebrate a retirement", "To perform an inspection", "To meet with some clients", "To write an article"],
+            questionVi: "Tại sao người phụ nữ ở nhà hàng?",
+            optionsVi: ["Để ăn mừng nghỉ hưu","Để kiểm tra","Để gặp khách hàng","Để viết bài"],
             answer: 2
           },
           {
             id: 42,
             question: "What does the woman mean when she says, \"it's very hot today\"?",
             options: ["She is unable to accept an invitation.", "A cooling system is not working.", "A meeting will end soon.", "She wants to change a seating request."],
+            questionVi: "Người phụ nữ muốn nói gì khi nói 'hôm nay rất nóng'?",
+            optionsVi: ["Cô không thể nhận lời mời.","Hệ thống làm mát không hoạt động.","Cuộc họp sẽ kết thúc sớm.","Cô muốn thay đổi yêu cầu chỗ ngồi."],
             answer: 3
           },
           {
             id: 43,
             question: "What does the man say about a parking garage?",
             options: ["It is free for customers.", "It is under construction.", "It closes soon.", "It offers monthly contracts."],
+            questionVi: "Người đàn ông nói gì về bãi đậu xe?",
+            optionsVi: ["Miễn phí cho khách hàng.","Đang sửa chữa.","Sắp đóng cửa.","Có hợp đồng hàng tháng."],
             answer: 0
           }
         ]
@@ -427,18 +507,24 @@ const listenTests = {
             id: 44,
             question: "Where does the woman most likely work?",
             options: ["At a university", "At a publishing company", "At an electronics store", "At a grocery store"],
+            questionVi: "Người phụ nữ có thể làm ở đâu?",
+            optionsVi: ["Trường đại học","Công ty xuất bản","Cửa hàng điện tử","Cửa hàng tạp hóa"],
             answer: 2
           },
           {
             id: 45,
             question: "What does Murat ask about?",
             options: ["How much an item costs", "When an event will begin", "How many people will participate", "Where to set up some equipment"],
+            questionVi: "Murat hỏi về điều gì?",
+            optionsVi: ["Giá bao nhiêu","Sự kiện bắt đầu khi nào","Bao nhiêu người tham gia","Đặt thiết bị ở đâu"],
             answer: 3
           },
           {
             id: 46,
             question: "What does the woman suggest doing?",
             options: ["Offering a discount", "Displaying informational materials", "Holding a contest", "Visiting a registration table"],
+            questionVi: "Người phụ nữ gợi ý làm gì?",
+            optionsVi: ["Giảm giá","Trưng bày tài liệu thông tin","Tổ chức cuộc thi","Đến bàn đăng ký"],
             answer: 1
           }
         ]
@@ -450,18 +536,24 @@ const listenTests = {
             id: 47,
             question: "What type of industry do the speakers most likely work in?",
             options: ["Textile manufacturing", "Food production", "Health care", "Hospitality"],
+            questionVi: "Những người nói có thể làm trong ngành nào?",
+            optionsVi: ["Sản xuất dệt may","Sản xuất thực phẩm","Chăm sóc sức khỏe","Khách sạn"],
             answer: 1
           },
           {
             id: 48,
             question: "What business challenge are the speakers discussing?",
             options: ["Lack of qualified personnel", "Rising production costs", "Changes in consumer preferences", "Increased competition"],
+            questionVi: "Thách thức kinh doanh nào đang được thảo luận?",
+            optionsVi: ["Thiếu nhân sự đủ trình độ","Chi phí sản xuất tăng","Thay đổi sở thích người tiêu dùng","Cạnh tranh gia tăng"],
             answer: 2
           },
           {
             id: 49,
             question: "What does the man say he will do?",
             options: ["Research more information", "Negotiate a discount", "Upgrade some machinery", "Train a new employee"],
+            questionVi: "Người đàn ông nói sẽ làm gì?",
+            optionsVi: ["Nghiên cứu thêm thông tin","Thương lượng giảm giá","Nâng cấp máy móc","Đào tạo nhân viên mới"],
             answer: 0
           }
         ]
@@ -473,18 +565,24 @@ const listenTests = {
             id: 50,
             question: "Why is the man calling?",
             options: ["To explain a business merger", "To describe a new company policy", "To offer the woman a work assignment", "To invite the woman to speak at a conference"],
+            questionVi: "Tại sao người đàn ông gọi điện?",
+            optionsVi: ["Để giải thích sáp nhập","Để mô tả chính sách mới","Để giao việc cho cô ấy","Để mời cô ấy phát biểu"],
             answer: 2
           },
           {
             id: 51,
             question: "What does the man say a client is interested in doing?",
             options: ["Purchasing another business", "Finding a new office space", "Revising a budget proposal", "Creating a marketing campaign"],
+            questionVi: "Khách hàng muốn làm gì?",
+            optionsVi: ["Mua công ty khác","Tìm văn phòng mới","Sửa đề xuất ngân sách","Tạo chiến dịch marketing"],
             answer: 3
           },
           {
             id: 52,
             question: "What does the woman ask the man to send?",
             options: ["A project description", "An event invitation", "Some social media links", "Some contact information"],
+            questionVi: "Người phụ nữ yêu cầu gửi gì?",
+            optionsVi: ["Mô tả dự án","Lời mời sự kiện","Liên kết mạng xã hội","Thông tin liên hệ"],
             answer: 0
           }
         ]
@@ -496,18 +594,24 @@ const listenTests = {
             id: 53,
             question: "What problem does the woman mention?",
             options: ["A vehicle is out of service.", "An employee is late.", "A shipment was damaged.", "Traffic is heavy."],
+            questionVi: "Người phụ nữ đề cập vấn đề gì?",
+            optionsVi: ["Xe bị hỏng.","Nhân viên đến muộn.","Hàng bị hư hại.","Giao thông đông đúc."],
             answer: 0
           },
           {
             id: 54,
             question: "Where do the speakers most likely work?",
             options: ["At a recording studio", "At a catering company", "At a radio station", "At a car dealership"],
+            questionVi: "Những người nói có thể làm ở đâu?",
+            optionsVi: ["Phòng thu âm","Công ty tiệc","Đài phát thanh","Đại lý ô tô"],
             answer: 1
           },
           {
             id: 55,
             question: "What does the man say he will do next?",
             options: ["Arrange for a car repair", "Order some kitchen supplies", "Carry some items", "Offer a refund"],
+            questionVi: "Người đàn ông nói sẽ làm gì tiếp theo?",
+            optionsVi: ["Sắp xếp sửa xe","Đặt đồ dùng bếp","Mang đồ","Hoàn tiền"],
             answer: 2
           }
         ]
@@ -519,18 +623,24 @@ const listenTests = {
             id: 56,
             question: "Why is the man calling the woman?",
             options: ["To plan a company event", "To confirm a work deadline", "To discuss a career path", "To accept a job offer"],
+            questionVi: "Tại sao người đàn ông gọi cho người phụ nữ?",
+            optionsVi: ["Để lên kế hoạch sự kiện","Để xác nhận deadline","Để thảo luận con đường sự nghiệp","Để nhận lời mời làm việc"],
             answer: 2
           },
           {
             id: 57,
             question: "Who most likely is the woman?",
             options: ["A newspaper editor", "A university professor", "A delivery person", "A professional actor"],
+            questionVi: "Người phụ nữ có thể là ai?",
+            optionsVi: ["Biên tập viên báo","Giáo sư đại học","Người giao hàng","Diễn viên chuyên nghiệp"],
             answer: 0
           },
           {
             id: 58,
             question: "What will the woman most likely do next?",
             options: ["Negotiate a contract", "Explain an office policy", "Review a r\u00e9sum\u00e9", "Describe a work schedule"],
+            questionVi: "Người phụ nữ có thể sẽ làm gì tiếp theo?",
+            optionsVi: ["Thương lượng hợp đồng","Giải thích chính sách văn phòng","Xem lý lịch","Mô tả lịch làm việc"],
             answer: 3
           }
         ]
@@ -542,18 +652,24 @@ const listenTests = {
             id: 59,
             question: "What are the speakers mainly discussing?",
             options: ["A new transportation route", "A company merger", "A public relations initiative", "A medical facility design"],
+            questionVi: "Những người nói đang thảo luận chủ yếu về điều gì?",
+            optionsVi: ["Tuyến giao thông mới","Sáp nhập công ty","Sáng kiến quan hệ công chúng","Thiết kế cơ sở y tế"],
             answer: 1
           },
           {
             id: 60,
             question: "Why does the woman say, \"they also talked about it last year\"?",
             options: ["To express doubt", "To explain a process", "To make a recommendation", "To update some information"],
+            questionVi: "Tại sao người phụ nữ nói 'họ cũng bàn năm ngoái'?",
+            optionsVi: ["Để bày tỏ nghi ngờ","Để giải thích quy trình","Để đưa ra khuyến nghị","Để cập nhật thông tin"],
             answer: 0
           },
           {
             id: 61,
             question: "What does the woman want to avoid?",
             options: ["Paying a certification fee", "Training additional staff", "Upgrading some technology", "Relocating to another city"],
+            questionVi: "Người phụ nữ muốn tránh điều gì?",
+            optionsVi: ["Trả phí chứng nhận","Đào tạo thêm nhân viên","Nâng cấp công nghệ","Chuyển đến thành phố khác"],
             answer: 3
           }
         ]
@@ -565,12 +681,16 @@ const listenTests = {
             id: 62,
             question: "Who is a gift for?",
             options: ["Donors", "Volunteers", "Employees", "Clients"],
+            questionVi: "Quà tặng dành cho ai?",
+            optionsVi: ["Nhà tài trợ","Tình nguyện viên","Nhân viên","Khách hàng"],
             answer: 2
           },
           {
             id: 63,
             question: "Look at the graphic. What is the price of the item the man recommends?",
             options: ["$21", "$18", "$24", "$15"],
+            questionVi: "Nhìn hình. Giá sản phẩm được khuyên là bao nhiêu?",
+            optionsVi: ["21 đô la","18 đô la","24 đô la","15 đô la"],
             answer: -1,
             hasGraphic: true
           },
@@ -578,6 +698,8 @@ const listenTests = {
             id: 64,
             question: "What is the woman going to send to the man?",
             options: ["A graphic file", "A list of names", "A delivery address", "An account number"],
+            questionVi: "Người phụ nữ sẽ gửi gì cho người đàn ông?",
+            optionsVi: ["File hình ảnh","Danh sách tên","Địa chỉ giao hàng","Số tài khoản"],
             answer: 0
           }
         ]
@@ -589,12 +711,16 @@ const listenTests = {
             id: 65,
             question: "What type of art will be displayed in an exhibit?",
             options: ["Clay sculptures", "Oil paintings", "Black-and-white photographs", "Pencil drawings"],
+            questionVi: "Loại nghệ thuật nào sẽ được trưng bày?",
+            optionsVi: ["Tượng đất sét","Tranh sơn dầu","Ảnh đen trắng","Tranh bút chì"],
             answer: 3
           },
           {
             id: 66,
             question: "Look at the graphic. Which piece of artwork will no longer be included?",
             options: ["A Careful Glance", "Promises", "Stormy Sea", "The Moment"],
+            questionVi: "Nhìn hình. Tác phẩm nào sẽ không còn được trưng bày?",
+            optionsVi: ["A Careful Glance","Promises","Stormy Sea","The Moment"],
             answer: -1,
             hasGraphic: true
           },
@@ -602,6 +728,8 @@ const listenTests = {
             id: 67,
             question: "What does the woman say she will do right away?",
             options: ["Speak with an artist", "Edit a recording", "Clean a gallery space", "Greet some visitors"],
+            questionVi: "Người phụ nữ nói sẽ làm gì ngay?",
+            optionsVi: ["Nói chuyện với nghệ sĩ","Chỉnh sửa bản ghi âm","Dọn dẹp phòng triển lãm","Đón khách"],
             answer: 1
           }
         ]
@@ -613,12 +741,16 @@ const listenTests = {
             id: 68,
             question: "Who most likely are the speakers?",
             options: ["Urban planners", "Journalists", "Engineers", "Environmental scientists"],
+            questionVi: "Những người nói có thể là ai?",
+            optionsVi: ["Nhà quy hoạch đô thị","Nhà báo","Kỹ sư","Nhà khoa học môi trường"],
             answer: 1
           },
           {
             id: 69,
             question: "Look at the graphic. Which site has already been completed?",
             options: ["Site A", "Site B", "Site C", "Site D"],
+            questionVi: "Nhìn hình. Địa điểm nào đã hoàn thành?",
+            optionsVi: ["Địa điểm A","Địa điểm B","Địa điểm C","Địa điểm D"],
             answer: -1,
             hasGraphic: true
           },
@@ -626,6 +758,8 @@ const listenTests = {
             id: 70,
             question: "What does the man suggest focusing on?",
             options: ["Work opportunities", "Wind turbine costs", "Supply chain issues", "Power capacity"],
+            questionVi: "Người đàn ông gợi ý tập trung vào điều gì?",
+            optionsVi: ["Cơ hội việc làm","Chi phí tuabin gió","Vấn đề chuỗi cung ứng","Công suất điện"],
             answer: 0
           }
         ]
@@ -640,18 +774,24 @@ const listenTests = {
             id: 71,
             question: "Who has recorded the message?",
             options: ["A city mayor's office", "A maintenance department", "An automobile dealership", "A building management office"],
+            questionVi: "Ai đã ghi tin nhắn?",
+            optionsVi: ["Văn phòng thị trưởng","Phòng bảo trì","Đại lý ô tô","Văn phòng quản lý tòa nhà"],
             answer: 3
           },
           {
             id: 72,
             question: "What are the listeners asked to do?",
             options: ["Move their vehicles", "Pay their parking fines", "Use an alternate entrance", "Participate in a meeting"],
+            questionVi: "Người nghe được yêu cầu làm gì?",
+            optionsVi: ["Di chuyển xe","Trả tiền phạt đậu xe","Dùng lối vào khác","Tham gia cuộc họp"],
             answer: 0
           },
           {
             id: 73,
             question: "What does the speaker say was mailed last week?",
             options: ["An election ballot", "A maintenance plan", "A map", "A coupon"],
+            questionVi: "Người nói cho biết tuần trước đã gửi gì?",
+            optionsVi: ["Phiếu bầu cử","Kế hoạch bảo trì","Bản đồ","Phiếu giảm giá"],
             answer: 2
           }
         ]
@@ -663,18 +803,24 @@ const listenTests = {
             id: 74,
             question: "What is the topic of the episode?",
             options: ["Garden landscaping", "Window installation", "Roof maintenance", "Kitchen renovations"],
+            questionVi: "Chủ đề của tập phát sóng là gì?",
+            optionsVi: ["Làm vườn cảnh quan","Lắp đặt cửa sổ","Bảo trì mái nhà","Cải tạo nhà bếp"],
             answer: 2
           },
           {
             id: 75,
             question: "What does the speaker emphasize about some tools?",
             options: ["They should be cleaned regularly.", "They should be of high quality.", "They were recently invented.", "They can be easily stored."],
+            questionVi: "Người nói nhấn mạnh điều gì về dụng cụ?",
+            optionsVi: ["Nên vệ sinh thường xuyên.","Nên có chất lượng cao.","Mới được phát minh.","Có thể dễ dàng cất giữ."],
             answer: 1
           },
           {
             id: 76,
             question: "What does the speaker recommend doing every year?",
             options: ["Treating some wood", "Consulting an electrician", "Taking some photos", "Draining some water"],
+            questionVi: "Người nói khuyên làm gì hàng năm?",
+            optionsVi: ["Xử lý gỗ","Tham vấn thợ điện","Chụp ảnh","Thoát nước"],
             answer: 2
           }
         ]
@@ -686,18 +832,24 @@ const listenTests = {
             id: 77,
             question: "Who most likely is the speaker?",
             options: ["A radio show host", "A tour guide", "A sales associate", "A professor"],
+            questionVi: "Người nói có thể là ai?",
+            optionsVi: ["MC chương trình radio","Hướng dẫn viên","Nhân viên bán hàng","Giáo sư"],
             answer: 1
           },
           {
             id: 78,
             question: "What will happen at two o'clock?",
             options: ["A lecture will begin.", "A demonstration will be given.", "An interview will be conducted.", "A park will close."],
+            questionVi: "Điều gì sẽ xảy ra lúc 2 giờ?",
+            optionsVi: ["Bài giảng sẽ bắt đầu.","Buổi trình diễn sẽ diễn ra.","Cuộc phỏng vấn sẽ được tiến hành.","Công viên sẽ đóng cửa."],
             answer: 0
           },
           {
             id: 79,
             question: "What is Orchid Caretakers?",
             options: ["A book", "An album", "A film", "A magazine"],
+            questionVi: "Orchid Caretakers là gì?",
+            optionsVi: ["Sách","Album","Phim","Tạp chí"],
             answer: 2
           }
         ]
@@ -709,18 +861,24 @@ const listenTests = {
             id: 80,
             question: "What event is taking place?",
             options: ["A fund-raising concert", "A sports competition", "A play rehearsal", "An awards ceremony"],
+            questionVi: "Sự kiện gì đang diễn ra?",
+            optionsVi: ["Buổi hòa nhạc gây quỹ","Cuộc thi thể thao","Tập dượt kịch","Lễ trao giải"],
             answer: 0
           },
           {
             id: 81,
             question: "What does the organization plan to do?",
             options: ["Change a policy", "Repair a building", "Select a winner", "Sponsor a team"],
+            questionVi: "Tổ chức dự định làm gì?",
+            optionsVi: ["Thay đổi chính sách","Sửa chữa tòa nhà","Chọn người chiến thắng","Tài trợ đội"],
             answer: 1
           },
           {
             id: 82,
             question: "What does the speaker encourage the listeners to do?",
             options: ["Order tickets early", "Visit a community center", "Purchase refreshments", "Donate clothing"],
+            questionVi: "Người nói khuyến khích người nghe làm gì?",
+            optionsVi: ["Đặt vé sớm","Thăm trung tâm cộng đồng","Mua đồ ăn thức uống","Quyên góp quần áo"],
             answer: 2
           }
         ]
@@ -732,18 +890,24 @@ const listenTests = {
             id: 83,
             question: "What is the topic of the workshop?",
             options: ["Time management", "Public speaking", "Leadership skills", "Professional networking"],
+            questionVi: "Chủ đề của hội thảo là gì?",
+            optionsVi: ["Quản lý thời gian","Thuyết trình trước công chúng","Kỹ năng lãnh đạo","Kết nối chuyên nghiệp"],
             answer: 0
           },
           {
             id: 84,
             question: "What does the speaker imply when he says, \"Erina's at the back of the room\"?",
             options: ["A guest speaker has just arrived.", "Assistance is available.", "Attendees should speak clearly and loudly.", "An extra chair should be provided."],
+            questionVi: "Người nói muốn nói gì khi nói 'Erina ở phía sau phòng'?",
+            optionsVi: ["Diễn giả khách mời vừa đến.","Có sự hỗ trợ sẵn sàng.","Người tham dự nên nói to.","Cần thêm ghế."],
             answer: 1
           },
           {
             id: 85,
             question: "What will the listeners do next?",
             options: ["Sign their names on a list", "Take a break", "Participate in an introductory activity", "Fill out a questionnaire"],
+            questionVi: "Người nghe sẽ làm gì tiếp theo?",
+            optionsVi: ["Ký tên vào danh sách","Nghỉ giải lao","Tham gia hoạt động giới thiệu","Điền bảng câu hỏi"],
             answer: 2
           }
         ]
@@ -755,18 +919,24 @@ const listenTests = {
             id: 86,
             question: "What is a historical site famous for?",
             options: ["Its defensive walls", "Its royal inhabitants", "An event that happened there", "Some artwork"],
+            questionVi: "Di tích lịch sử nổi tiếng vì điều gì?",
+            optionsVi: ["Tường phòng thủ","Cư dân hoàng gia","Sự kiện đã xảy ra ở đó","Tác phẩm nghệ thuật"],
             answer: 3
           },
           {
             id: 87,
             question: "Why does the speaker apologize?",
             options: ["The listeners cannot take pictures.", "An area is closed to the listeners.", "There is no gift shop.", "A tour started late."],
+            questionVi: "Tại sao người nói xin lỗi?",
+            optionsVi: ["Người nghe không được chụp ảnh.","Khu vực đóng cửa.","Không có cửa hàng quà.","Chuyến tham quan bắt đầu muộn."],
             answer: 0
           },
           {
             id: 88,
             question: "What does the speaker ask the listeners to do?",
             options: ["Show their tickets", "Put on protective clothing", "Use some handrails", "Speak quietly"],
+            questionVi: "Người nói yêu cầu người nghe làm gì?",
+            optionsVi: ["Cho xem vé","Mặc quần áo bảo hộ","Sử dụng tay vịn","Nói nhỏ"],
             answer: 2
           }
         ]
@@ -778,18 +948,24 @@ const listenTests = {
             id: 89,
             question: "What is the speaker mainly discussing?",
             options: ["An advertising campaign", "A market expansion", "Some contract negotiations", "Some audit procedures"],
+            questionVi: "Người nói đang thảo luận chủ yếu về điều gì?",
+            optionsVi: ["Chiến dịch quảng cáo","Mở rộng thị trường","Đàm phán hợp đồng","Quy trình kiểm toán"],
             answer: 0
           },
           {
             id: 90,
             question: "What does the speaker imply when he says, \"this is a priority\"?",
             options: ["Overtime pay has been approved.", "A deadline must be met.", "A client expressed concern.", "A supervisor will be observing closely."],
+            questionVi: "Người nói muốn nói gì khi nói 'đây là ưu tiên'?",
+            optionsVi: ["Đã duyệt làm thêm giờ.","Phải đáp ứng deadline.","Khách hàng lo ngại.","Cấp trên sẽ giám sát."],
             answer: 1
           },
           {
             id: 91,
             question: "What will the listeners do next?",
             options: ["View a presentation", "Review a budget", "Revise some work", "Do some research"],
+            questionVi: "Người nghe sẽ làm gì tiếp theo?",
+            optionsVi: ["Xem bài thuyết trình","Xem xét ngân sách","Chỉnh sửa công việc","Nghiên cứu"],
             answer: 2
           }
         ]
@@ -801,18 +977,24 @@ const listenTests = {
             id: 92,
             question: "Where do the listeners most likely work?",
             options: ["At a hospital", "At a restaurant", "At a grocery store", "At an electronics store"],
+            questionVi: "Người nghe có thể làm ở đâu?",
+            optionsVi: ["Bệnh viện","Nhà hàng","Cửa hàng tạp hóa","Cửa hàng điện tử"],
             answer: 0
           },
           {
             id: 93,
             question: "What is the main purpose of the talk?",
             options: ["To make a request", "To address staff complaints", "To present a new schedule", "To explain a technical process"],
+            questionVi: "Mục đích chính của bài nói là gì?",
+            optionsVi: ["Đưa ra yêu cầu","Giải quyết khiếu nại nhân viên","Trình bày lịch mới","Giải thích quy trình kỹ thuật"],
             answer: 1
           },
           {
             id: 94,
             question: "What does the speaker imply when she says, \"That will require management approval\"?",
             options: ["A process has not been followed.", "The listeners may be asked to work extra shifts.", "The listeners should contact a manager.", "A change will not be immediate."],
+            questionVi: "Người nói muốn nói gì khi nói 'cần sự phê duyệt của ban quản lý'?",
+            optionsVi: ["Quy trình chưa được tuân thủ.","Người nghe có thể phải làm thêm ca.","Người nghe nên liên hệ quản lý.","Thay đổi sẽ không diễn ra ngay."],
             answer: 3
           }
         ]
@@ -824,12 +1006,16 @@ const listenTests = {
             id: 95,
             question: "According to the speaker, what was recently completed?",
             options: ["A company reorganization", "A park renovation", "A volunteer training", "A conservation project"],
+            questionVi: "Theo người nói, điều gì mới hoàn thành?",
+            optionsVi: ["Tái cơ cấu công ty","Cải tạo công viên","Đào tạo tình nguyện viên","Dự án bảo tồn"],
             answer: 1
           },
           {
             id: 96,
             question: "Look at the graphic. Where does the speaker say refreshments will be served?",
             options: ["Location 1", "Location 2", "Location 3", "Location 4"],
+            questionVi: "Nhìn hình. Đồ ăn nhẹ sẽ được phục vụ ở đâu?",
+            optionsVi: ["Vị trí 1","Vị trí 2","Vị trí 3","Vị trí 4"],
             answer: 0,
             hasGraphic: true
           },
@@ -837,6 +1023,8 @@ const listenTests = {
             id: 97,
             question: "What are the listeners reminded to do?",
             options: ["Complete a survey", "Donate some money", "Join an organization", "Post some photographs"],
+            questionVi: "Người nghe được nhắc nhở làm gì?",
+            optionsVi: ["Hoàn thành khảo sát","Quyên góp tiền","Tham gia tổ chức","Đăng ảnh"],
             answer: 3
           }
         ]
@@ -848,12 +1036,16 @@ const listenTests = {
             id: 98,
             question: "What is the topic of today's lecture?",
             options: ["When to harvest crops", "Where to plant trees", "How to grow vegetables", "Which flowers need more sun"],
+            questionVi: "Chủ đề bài giảng hôm nay là gì?",
+            optionsVi: ["Khi nào thu hoạch","Trồng cây ở đâu","Cách trồng rau","Hoa nào cần nhiều nắng"],
             answer: 2
           },
           {
             id: 99,
             question: "Look at the graphic. At what depth should samples be collected this month?",
             options: ["12 inches", "4 inches", "6 inches", "8 inches"],
+            questionVi: "Nhìn hình. Mẫu đất nên được lấy ở độ sâu nào tháng này?",
+            optionsVi: ["12 inch","4 inch","6 inch","8 inch"],
             answer: 0,
             hasGraphic: true
           },
@@ -861,6 +1053,8 @@ const listenTests = {
             id: 100,
             question: "What does the speaker encourage the listeners to do?",
             options: ["Turn off mobile phones", "Have some refreshments", "Purchase some seeds", "Sign up for a mailing list"],
+            questionVi: "Người nói khuyến khích người nghe làm gì?",
+            optionsVi: ["Tắt điện thoại","Ăn nhẹ","Mua hạt giống","Đăng ký nhận thư"],
             answer: 3
           }
         ]
@@ -880,143 +1074,143 @@ const listenTests = {
       part4: []  // Fill with start times in seconds for each group
     },
     part1: [
-      { id: 1, options: ["She's inserting a cord into an outlet.", "She's pressing a button on a machine.", "She's gripping the handle of a drawer.", "She's tacking a notice onto the wall."], answer: -1 },
-      { id: 2, options: ["Some window shutters are being replaced.", "A pillow is being arranged on a seat.", "An outdoor table is being cleared off.", "Some wooden boards are being painted."], answer: -1 },
-      { id: 3, options: ["Some utensils have been discarded in a bin.", "Some bottles are being emptied into a sink.", "A rolling chair has been placed next to a counter.", "Some drawers have been left open."], answer: -1 },
-      { id: 4, options: ["A man is chopping some wood into pieces.", "Leaves are scattered across the grass.", "A man is closing a window.", "Wood is piled near a fence."], answer: -1 },
-      { id: 5, options: ["People are standing in line in a lobby.", "Items are being loaded into shopping bags.", "Tents have been set up in a parking area.", "A worker is putting up a canopy."], answer: -1 },
-      { id: 6, options: ["Some luggage is stacked next to an escalator.", "A suitcase is being lifted onto a shuttle bus.", "Some suitcases are displayed in a shop window.", "A luggage rack has two levels."], answer: -1 }
+      { id: 1, options: ["She's inserting a cord into an outlet.", "She's pressing a button on a machine.", "She's gripping the handle of a drawer.", "She's tacking a notice onto the wall."], optionsVi: ["Cô ấy đang cắm dây vào ổ điện.", "Cô ấy đang bấm nút trên máy.", "Cô ấy đang nắm tay cầm ngăn kéo.", "Cô ấy đang dán thông báo lên tường."], answer: -1 },
+      { id: 2, options: ["Some window shutters are being replaced.", "A pillow is being arranged on a seat.", "An outdoor table is being cleared off.", "Some wooden boards are being painted."], optionsVi: ["Một số cánh cửa chớp đang được thay.", "Gối đang được sắp xếp trên ghế.", "Bàn ngoài trời đang được dọn.", "Một số tấm gỗ đang được sơn."], answer: -1 },
+      { id: 3, options: ["Some utensils have been discarded in a bin.", "Some bottles are being emptied into a sink.", "A rolling chair has been placed next to a counter.", "Some drawers have been left open."], optionsVi: ["Đồ dùng đã bị vứt trong thùng.", "Chai đang được đổ vào bồn rửa.", "Ghế có bánh xe được đặt cạnh quầy.", "Một số ngăn kéo đã bị để mở."], answer: -1 },
+      { id: 4, options: ["A man is chopping some wood into pieces.", "Leaves are scattered across the grass.", "A man is closing a window.", "Wood is piled near a fence."], optionsVi: ["Người đàn ông đang chặt gỗ.", "Lá rụng rải rác trên cỏ.", "Người đàn ông đang đóng cửa sổ.", "Gỗ được chất gần hàng rào."], answer: -1 },
+      { id: 5, options: ["People are standing in line in a lobby.", "Items are being loaded into shopping bags.", "Tents have been set up in a parking area.", "A worker is putting up a canopy."], optionsVi: ["Mọi người đang xếp hàng trong sảnh.", "Đồ đang được cho vào túi mua sắm.", "Lều đã được dựng trong bãi đậu xe.", "Công nhân đang lắp mái che."], answer: -1 },
+      { id: 6, options: ["Some luggage is stacked next to an escalator.", "A suitcase is being lifted onto a shuttle bus.", "Some suitcases are displayed in a shop window.", "A luggage rack has two levels."], optionsVi: ["Hành lý được xếp chồng cạnh thang cuốn.", "Vali đang được đưa lên xe buýt.", "Vali được trưng bày trong tủ kính cửa hàng.", "Giá để hành lý có hai tầng."], answer: -1 }
     ],
     part2: [
-      { id: 7, question: "Have the machines on the factory floor been cleaned?", options: ["No, not yet.", "It's in the shipping container.", "I just put it in the trash bin."], answer: 0 },
-      { id: 8, question: "How much will the budget increase next year?", options: ["About 10 percent.", "Three hours, I think.", "At the bank's main branch."], answer: 0 },
-      { id: 9, question: "You're going to water the plants before you leave, aren't you?", options: ["I walked the whole way.", "Yes, right after lunch.", "In the breakroom."], answer: 1 },
-      { id: 10, question: "Aren't you going to schedule an eye doctor appointment?", options: ["Those glasses look nice on you.", "I already scheduled one.", "The seminar is three days long."], answer: 1 },
-      { id: 11, question: "I'm going to try to fix this printer.", options: ["You're right, it doesn't fit.", "Double-sided copies.", "Are you sure it can be repaired?"], answer: 2 },
-      { id: 12, question: "What should we do with these brochures?", options: ["A trip to the seashore.", "Yes, I found it already.", "I'll leave them at the front desk."], answer: 2 },
-      { id: 13, question: "Has the policy meeting been rescheduled?", options: ["We have lots of desk calendar designs.", "Yes, it's happening tomorrow instead.", "This soup I ordered is delicious."], answer: 1 },
-      { id: 14, question: "Why don't we stop by the office cafeteria on our way to the workshop?", options: ["Sure, we have time for that.", "A full-service buffet.", "The topic is professional networking."], answer: 0 },
-      { id: 15, question: "Have you tried our famous pasta dish?", options: ["We need a table for five.", "Yes, it was delicious.", "I'll try to make it on time."], answer: 1 },
-      { id: 16, question: "Who's the opening act at tonight's concert?", options: ["Could you turn up the volume?", "A jazz singer from France.", "The position has been filled."], answer: 1 },
-      { id: 17, question: "When do the product demonstrations start?", options: ["The schedule was e-mailed last Friday.", "Some innovative features.", "In room 202, I think."], answer: 0 },
-      { id: 18, question: "I tried updating the Web site, but it didn't work.", options: ["That date works for me.", "Usually our online reviews.", "Just send me the changes you want."], answer: 2 },
-      { id: 19, question: "Did you hire a new welding specialist?", options: ["The part's back-ordered.", "Yes, he starts tomorrow.", "No, it should be higher."], answer: 1 },
-      { id: 20, question: "How was the color palette for the lobby chosen?", options: ["Blue and orange.", "It was fine, thanks.", "I wasn't involved."], answer: 2 },
-      { id: 21, question: "When are we ordering more supplies for the office?", options: ["In the storage closet.", "Next week on Monday.", "The new desk looks great!"], answer: 1 },
-      { id: 22, question: "The battery for the water pump is going to be solar powered, right?", options: ["We're still in the planning stages.", "A hundred and forty dollars per year.", "Yes, I'd love a glass of water."], answer: 0 },
-      { id: 23, question: "Where can I buy a charger for this laptop?", options: ["Around three o'clock.", "I can order one for you.", "A limited return policy."], answer: 1 },
-      { id: 24, question: "Do I need to reserve a meeting room?", options: ["Yes, let me show you how.", "The service is good.", "My slide presentation."], answer: 0 },
-      { id: 25, question: "When's the new department director supposed to start?", options: ["It's an hour long.", "Ms. Pavlova isn't retiring for several weeks.", "No, that department's upstairs."], answer: 1 },
-      { id: 26, question: "Should I deliver these pizzas, or will you?", options: ["No thanks. I'm not hungry.", "Ten dollars for two.", "They're being picked up."], answer: 2 },
-      { id: 27, question: "This month's shipment schedule has been revised.", options: ["I couldn't find them either.", "Which dates have been changed?", "Two dollars per pound."], answer: 1 },
-      { id: 28, question: "How much will the repairs cost?", options: ["The work is covered under the warranty plan.", "Yes, it's also available in red.", "In about two weeks."], answer: 0 },
-      { id: 29, question: "Why don't we provide more samples of the wallpaper patterns?", options: ["The newspaper is delivered daily.", "An interior design course.", "There are plenty in the binders."], answer: 2 },
-      { id: 30, question: "Can you give me a tour of the property this afternoon?", options: ["Sorry, I won't have time until tomorrow.", "It has a very modern design.", "A house on Maple Street."], answer: 0 },
-      { id: 31, question: "Who's scheduled to test the product today?", options: ["We're waiting for confirmation.", "It's a great album, right?", "About six weeks ago."], answer: 0 }
+      { id: 7, question: "Have the machines on the factory floor been cleaned?", questionVi: "Máy móc ở nhà máy đã được vệ sinh chưa?", options: ["No, not yet.", "It's in the shipping container.", "I just put it in the trash bin."], optionsVi: ["Chưa.", "Nó ở trong thùng hàng.", "Tôi vừa bỏ vào thùng rác."], answer: 0 },
+      { id: 8, question: "How much will the budget increase next year?", questionVi: "Ngân sách sẽ tăng bao nhiêu năm tới?", options: ["About 10 percent.", "Three hours, I think.", "At the bank's main branch."], optionsVi: ["Khoảng 10 phần trăm.", "Ba tiếng, tôi nghĩ.", "Ở chi nhánh chính của ngân hàng."], answer: 0 },
+      { id: 9, question: "You're going to water the plants before you leave, aren't you?", questionVi: "Bạn sẽ tưới cây trước khi về, phải không?", options: ["I walked the whole way.", "Yes, right after lunch.", "In the breakroom."], optionsVi: ["Tôi đi bộ suốt.", "Vâng, ngay sau bữa trưa.", "Trong phòng nghỉ."], answer: 1 },
+      { id: 10, question: "Aren't you going to schedule an eye doctor appointment?", questionVi: "Bạn không định đặt lịch khám mắt sao?", options: ["Those glasses look nice on you.", "I already scheduled one.", "The seminar is three days long."], optionsVi: ["Kính đó đẹp lắm.", "Tôi đã đặt rồi.", "Hội thảo kéo dài ba ngày."], answer: 1 },
+      { id: 11, question: "I'm going to try to fix this printer.", questionVi: "Tôi sẽ thử sửa máy in này.", options: ["You're right, it doesn't fit.", "Double-sided copies.", "Are you sure it can be repaired?"], optionsVi: ["Bạn nói đúng, nó không vừa.", "Bản sao hai mặt.", "Bạn chắc nó sửa được không?"], answer: 2 },
+      { id: 12, question: "What should we do with these brochures?", questionVi: "Chúng ta nên làm gì với mấy tờ rơi này?", options: ["A trip to the seashore.", "Yes, I found it already.", "I'll leave them at the front desk."], optionsVi: ["Chuyến đi biển.", "Vâng, tôi đã tìm thấy rồi.", "Tôi sẽ để ở quầy lễ tân."], answer: 2 },
+      { id: 13, question: "Has the policy meeting been rescheduled?", questionVi: "Cuộc họp chính sách đã được dời lịch chưa?", options: ["We have lots of desk calendar designs.", "Yes, it's happening tomorrow instead.", "This soup I ordered is delicious."], optionsVi: ["Chúng tôi có nhiều mẫu lịch bàn.", "Rồi, chuyển sang ngày mai.", "Món súp tôi gọi rất ngon."], answer: 1 },
+      { id: 14, question: "Why don't we stop by the office cafeteria on our way to the workshop?", questionVi: "Sao mình không ghé căng tin trên đường đi hội thảo?", options: ["Sure, we have time for that.", "A full-service buffet.", "The topic is professional networking."], optionsVi: ["Được, mình có thời gian.", "Buffet đầy đủ.", "Chủ đề là kết nối chuyên nghiệp."], answer: 0 },
+      { id: 15, question: "Have you tried our famous pasta dish?", questionVi: "Bạn đã thử món mì nổi tiếng của chúng tôi chưa?", options: ["We need a table for five.", "Yes, it was delicious.", "I'll try to make it on time."], optionsVi: ["Chúng tôi cần bàn cho năm người.", "Rồi, rất ngon.", "Tôi sẽ cố đến đúng giờ."], answer: 1 },
+      { id: 16, question: "Who's the opening act at tonight's concert?", questionVi: "Ai là nghệ sĩ mở màn buổi hòa nhạc tối nay?", options: ["Could you turn up the volume?", "A jazz singer from France.", "The position has been filled."], optionsVi: ["Bạn tăng âm lượng được không?", "Ca sĩ jazz từ Pháp.", "Vị trí đã được lấp."], answer: 1 },
+      { id: 17, question: "When do the product demonstrations start?", questionVi: "Buổi trình diễn sản phẩm bắt đầu khi nào?", options: ["The schedule was e-mailed last Friday.", "Some innovative features.", "In room 202, I think."], optionsVi: ["Lịch đã được gửi email thứ Sáu tuần trước.", "Một số tính năng sáng tạo.", "Phòng 202, tôi nghĩ."], answer: 0 },
+      { id: 18, question: "I tried updating the Web site, but it didn't work.", questionVi: "Tôi thử cập nhật trang web nhưng không được.", options: ["That date works for me.", "Usually our online reviews.", "Just send me the changes you want."], optionsVi: ["Ngày đó được.", "Thường là đánh giá trực tuyến.", "Gửi cho tôi thay đổi bạn muốn."], answer: 2 },
+      { id: 19, question: "Did you hire a new welding specialist?", questionVi: "Bạn đã tuyển thợ hàn mới chưa?", options: ["The part's back-ordered.", "Yes, he starts tomorrow.", "No, it should be higher."], optionsVi: ["Linh kiện đang đặt hàng.", "Rồi, anh ấy bắt đầu ngày mai.", "Không, nên cao hơn."], answer: 1 },
+      { id: 20, question: "How was the color palette for the lobby chosen?", questionVi: "Bảng màu cho sảnh được chọn như thế nào?", options: ["Blue and orange.", "It was fine, thanks.", "I wasn't involved."], optionsVi: ["Xanh dương và cam.", "Ổn, cảm ơn.", "Tôi không tham gia."], answer: 2 },
+      { id: 21, question: "When are we ordering more supplies for the office?", questionVi: "Khi nào đặt thêm văn phòng phẩm?", options: ["In the storage closet.", "Next week on Monday.", "The new desk looks great!"], optionsVi: ["Trong tủ đồ.", "Tuần sau thứ Hai.", "Bàn mới trông đẹp!"], answer: 1 },
+      { id: 22, question: "The battery for the water pump is going to be solar powered, right?", questionVi: "Pin máy bơm nước sẽ dùng năng lượng mặt trời, đúng không?", options: ["We're still in the planning stages.", "A hundred and forty dollars per year.", "Yes, I'd love a glass of water."], optionsVi: ["Chúng tôi vẫn đang lên kế hoạch.", "Một trăm bốn mươi đô la mỗi năm.", "Vâng, tôi muốn một ly nước."], answer: 0 },
+      { id: 23, question: "Where can I buy a charger for this laptop?", questionVi: "Tôi có thể mua sạc laptop ở đâu?", options: ["Around three o'clock.", "I can order one for you.", "A limited return policy."], optionsVi: ["Khoảng ba giờ.", "Tôi có thể đặt cho bạn.", "Chính sách đổi trả hạn chế."], answer: 1 },
+      { id: 24, question: "Do I need to reserve a meeting room?", questionVi: "Tôi có cần đặt phòng họp không?", options: ["Yes, let me show you how.", "The service is good.", "My slide presentation."], optionsVi: ["Có, để tôi chỉ bạn.", "Dịch vụ tốt.", "Bài thuyết trình slide."], answer: 0 },
+      { id: 25, question: "When's the new department director supposed to start?", questionVi: "Giám đốc bộ phận mới bắt đầu khi nào?", options: ["It's an hour long.", "Ms. Pavlova isn't retiring for several weeks.", "No, that department's upstairs."], optionsVi: ["Kéo dài một tiếng.", "Bà Pavlova còn vài tuần nữa mới nghỉ hưu.", "Không, bộ phận đó ở trên lầu."], answer: 1 },
+      { id: 26, question: "Should I deliver these pizzas, or will you?", questionVi: "Tôi giao mấy hộp pizza hay bạn giao?", options: ["No thanks. I'm not hungry.", "Ten dollars for two.", "They're being picked up."], optionsVi: ["Không, cảm ơn. Tôi không đói.", "Mười đô la hai cái.", "Họ sẽ đến lấy."], answer: 2 },
+      { id: 27, question: "This month's shipment schedule has been revised.", questionVi: "Lịch giao hàng tháng này đã được sửa.", options: ["I couldn't find them either.", "Which dates have been changed?", "Two dollars per pound."], optionsVi: ["Tôi cũng không tìm thấy.", "Ngày nào đã thay đổi?", "Hai đô la mỗi pound."], answer: 1 },
+      { id: 28, question: "How much will the repairs cost?", questionVi: "Chi phí sửa chữa là bao nhiêu?", options: ["The work is covered under the warranty plan.", "Yes, it's also available in red.", "In about two weeks."], optionsVi: ["Được bảo hành.", "Vâng, cũng có màu đỏ.", "Khoảng hai tuần."], answer: 0 },
+      { id: 29, question: "Why don't we provide more samples of the wallpaper patterns?", questionVi: "Sao mình không cung cấp thêm mẫu giấy dán tường?", options: ["The newspaper is delivered daily.", "An interior design course.", "There are plenty in the binders."], optionsVi: ["Báo được giao hàng ngày.", "Khóa thiết kế nội thất.", "Có rất nhiều trong bìa hồ sơ."], answer: 2 },
+      { id: 30, question: "Can you give me a tour of the property this afternoon?", questionVi: "Bạn có thể dẫn tôi xem bất động sản chiều nay không?", options: ["Sorry, I won't have time until tomorrow.", "It has a very modern design.", "A house on Maple Street."], optionsVi: ["Xin lỗi, phải đến ngày mai.", "Thiết kế rất hiện đại.", "Ngôi nhà trên đường Maple."], answer: 0 },
+      { id: 31, question: "Who's scheduled to test the product today?", questionVi: "Ai được lên lịch thử nghiệm sản phẩm hôm nay?", options: ["We're waiting for confirmation.", "It's a great album, right?", "About six weeks ago."], optionsVi: ["Chúng tôi đang chờ xác nhận.", "Album hay, phải không?", "Khoảng sáu tuần trước."], answer: 0 }
     ],
     part3: [
       {
         passage: "M: Good morning, captain. We'll be docking at the port in Kolkata this evening, right?\nW: Actually, we had to change course overnight to avoid a storm, so we're running behind schedule. But we should arrive early tomorrow.\nM: Well, that's not too bad.\nW: Oh, Hector has the day off today, so I'll need you to do the morning rounds — starting with checking the machinery in the engine room.\nM: Of course - I'll head there now.",
         questions: [
-          { id: 32, question: "Where do the speakers most likely work?", options: ["At a hospital", "On a ship", "At a factory", "At an airport"], answer: 1 },
-          { id: 33, question: "What does the woman say about the schedule?", options: ["It has been delayed", "It was sent by e-mail", "It needs to be approved", "It will be posted online"], answer: 0 },
-          { id: 34, question: "What does the woman ask the man to do?", options: ["Check some machinery", "Contact a client", "Review a report", "Train a new employee"], answer: 0 }
+          { id: 32, question: "Where do the speakers most likely work?", questionVi: "Những người nói có thể làm ở đâu?", options: ["At a hospital", "On a ship", "At a factory", "At an airport"], optionsVi: ["Bệnh viện", "Trên tàu", "Nhà máy", "Sân bay"], answer: 1 },
+          { id: 33, question: "What does the woman say about the schedule?", questionVi: "Người phụ nữ nói gì về lịch trình?", options: ["It has been delayed", "It was sent by e-mail", "It needs to be approved", "It will be posted online"], optionsVi: ["Đã bị trì hoãn", "Đã được gửi email", "Cần được phê duyệt", "Sẽ được đăng trực tuyến"], answer: 0 },
+          { id: 34, question: "What does the woman ask the man to do?", questionVi: "Người phụ nữ yêu cầu người đàn ông làm gì?", options: ["Check some machinery", "Contact a client", "Review a report", "Train a new employee"], optionsVi: ["Kiểm tra máy móc", "Liên hệ khách hàng", "Xem xét báo cáo", "Đào tạo nhân viên mới"], answer: 0 }
         ]
       },
       {
         passage: "M: Hi. I'm here to schedule some personal training sessions.\nW: OK. What are your fitness goals?\nM: I'd like to lift weights and build strength.\nW: I can work with you on that. Are you currently a member here?\nM: No, I'll also need to sign up for a membership. I saw online that you're running a special for new members — fifty percent off the first month's membership. Can I sign up for that?\nW: Absolutely. But before I get you signed up, let me show you around our facility.",
         questions: [
-          { id: 35, question: "What does the man want to do?", options: ["Renew a membership", "Schedule training sessions", "Cancel a class", "Return some equipment"], answer: 1 },
-          { id: 36, question: "What did the man see online?", options: ["A class schedule", "A discount offer", "A facility tour video", "A customer review"], answer: 1 },
-          { id: 37, question: "What does the woman offer to do?", options: ["Waive a fee", "Show the facility", "Provide a free session", "Check availability"], answer: 1 }
+          { id: 35, question: "What does the man want to do?", questionVi: "Người đàn ông muốn làm gì?", options: ["Renew a membership", "Schedule training sessions", "Cancel a class", "Return some equipment"], optionsVi: ["Gia hạn thành viên", "Đặt lịch tập luyện", "Hủy lớp", "Trả thiết bị"], answer: 1 },
+          { id: 36, question: "What did the man see online?", questionVi: "Người đàn ông thấy gì trên mạng?", options: ["A class schedule", "A discount offer", "A facility tour video", "A customer review"], optionsVi: ["Lịch lớp học", "Ưu đãi giảm giá", "Video tham quan", "Đánh giá khách hàng"], answer: 1 },
+          { id: 37, question: "What does the woman offer to do?", questionVi: "Người phụ nữ đề nghị làm gì?", options: ["Waive a fee", "Show the facility", "Provide a free session", "Check availability"], optionsVi: ["Miễn phí", "Dẫn xem cơ sở", "Tặng buổi tập miễn phí", "Kiểm tra lịch trống"], answer: 1 }
         ]
       },
       {
         passage: "W: As you can see, this Renaissance landscape painting we acquired is in bad condition. We can't display it yet.\nM: Hmm, yes. This painting will need significant restoration work.\nW: I'll begin by investigating the artist's color palette and style to see how we should repair the damaged areas.",
         questions: [
-          { id: 38, question: "Where do the speakers most likely work?", options: ["At a museum", "At a library", "At a photography studio", "At a construction site"], answer: 0 },
-          { id: 39, question: "What problem do the speakers discuss?", options: ["A painting is damaged", "A schedule is delayed", "An order is incorrect", "A budget is too small"], answer: 0 },
-          { id: 40, question: "What will the woman do first?", options: ["Order supplies", "Research the artist's techniques", "Contact an expert", "Write a report"], answer: 1 }
+          { id: 38, question: "Where do the speakers most likely work?", questionVi: "Những người nói có thể làm ở đâu?", options: ["At a museum", "At a library", "At a photography studio", "At a construction site"], optionsVi: ["Bảo tàng", "Thư viện", "Phòng chụp ảnh", "Công trường xây dựng"], answer: 0 },
+          { id: 39, question: "What problem do the speakers discuss?", questionVi: "Vấn đề gì được thảo luận?", options: ["A painting is damaged", "A schedule is delayed", "An order is incorrect", "A budget is too small"], optionsVi: ["Tranh bị hư hỏng", "Lịch bị trì hoãn", "Đơn hàng sai", "Ngân sách quá nhỏ"], answer: 0 },
+          { id: 40, question: "What will the woman do first?", questionVi: "Người phụ nữ sẽ làm gì trước?", options: ["Order supplies", "Research the artist's techniques", "Contact an expert", "Write a report"], optionsVi: ["Đặt vật tư", "Nghiên cứu kỹ thuật của họa sĩ", "Liên hệ chuyên gia", "Viết báo cáo"], answer: 1 }
         ]
       },
       {
         passage: "W: Hi, Ozan. Do you have time to review some slides I'm presenting at a meeting on Thursday?\nM1: Oh. Is that the meeting with Smith Incorporated?\nW: Yes. I'm presenting them with our updated marketing plan for their chain of bookstores.\nM1: You know, Smith Incorporated prefers informal meetings. I think just a handout highlighting how our marketing plan will positively impact their book sales would be enough.\nW: Really? Thilo, you've worked with this client before. What do you think?\nM2: Ozan is right. I think they'd prefer a meeting that was more of a conversation than a presentation.",
         questions: [
-          { id: 41, question: "What is the woman preparing for?", options: ["A job interview", "A client meeting", "A training workshop", "A product launch"], answer: 1 },
-          { id: 42, question: "What type of business is Smith Incorporated?", options: ["A bookstore chain", "A marketing firm", "A publishing house", "A technology company"], answer: 0 },
-          { id: 43, question: "What do the men suggest?", options: ["Using a less formal approach", "Hiring more staff", "Changing the meeting date", "Requesting more data"], answer: 0 }
+          { id: 41, question: "What is the woman preparing for?", questionVi: "Người phụ nữ đang chuẩn bị cho điều gì?", options: ["A job interview", "A client meeting", "A training workshop", "A product launch"], optionsVi: ["Phỏng vấn xin việc", "Gặp khách hàng", "Hội thảo đào tạo", "Ra mắt sản phẩm"], answer: 1 },
+          { id: 42, question: "What type of business is Smith Incorporated?", questionVi: "Smith Incorporated là loại doanh nghiệp gì?", options: ["A bookstore chain", "A marketing firm", "A publishing house", "A technology company"], optionsVi: ["Chuỗi hiệu sách", "Công ty marketing", "Nhà xuất bản", "Công ty công nghệ"], answer: 0 },
+          { id: 43, question: "What do the men suggest?", questionVi: "Hai người đàn ông gợi ý gì?", options: ["Using a less formal approach", "Hiring more staff", "Changing the meeting date", "Requesting more data"], optionsVi: ["Cách tiếp cận ít trang trọng hơn", "Tuyển thêm nhân viên", "Đổi ngày họp", "Yêu cầu thêm dữ liệu"], answer: 0 }
         ]
       },
       {
         passage: "W: I heard that the results of your experiment were better than you expected. Congratulations!\nM: Thanks! I thought we'd have to run that reaction ten times before we got a positive result. But we got it on the third try.\nW: You'll have to write up your results and submit them to the research director. That's Esra, right?\nM: Oh, Esra's leaving the company next week.\nW: Oh, I didn't know that. I wonder if you'll be promoted to fill her position.\nM: I don't think so. I've never managed an entire research group. I hope to get some experience doing that next quarter.",
         questions: [
-          { id: 44, question: "What are the speakers discussing?", options: ["A product launch", "An experiment result", "A budget proposal", "A hiring decision"], answer: 1 },
-          { id: 45, question: "What does the woman learn about Esra?", options: ["She received an award", "She is leaving the company", "She was promoted", "She finished a project"], answer: 1 },
-          { id: 46, question: "Why does the man say he is not ready for a promotion?", options: ["He lacks management experience", "He has not finished his degree", "He is planning to relocate", "He prefers laboratory work"], answer: 0 }
+          { id: 44, question: "What are the speakers discussing?", questionVi: "Họ đang thảo luận về điều gì?", options: ["A product launch", "An experiment result", "A budget proposal", "A hiring decision"], optionsVi: ["Ra mắt sản phẩm", "Kết quả thí nghiệm", "Đề xuất ngân sách", "Quyết định tuyển dụng"], answer: 1 },
+          { id: 45, question: "What does the woman learn about Esra?", questionVi: "Người phụ nữ biết được gì về Esra?", options: ["She received an award", "She is leaving the company", "She was promoted", "She finished a project"], optionsVi: ["Cô ấy được giải thưởng", "Cô ấy sắp rời công ty", "Cô ấy được thăng chức", "Cô ấy hoàn thành dự án"], answer: 1 },
+          { id: 46, question: "Why does the man say he is not ready for a promotion?", questionVi: "Tại sao người đàn ông chưa sẵn sàng thăng chức?", options: ["He lacks management experience", "He has not finished his degree", "He is planning to relocate", "He prefers laboratory work"], optionsVi: ["Thiếu kinh nghiệm quản lý", "Chưa hoàn thành bằng cấp", "Đang dự định chuyển đi", "Thích làm trong phòng thí nghiệm"], answer: 0 }
         ]
       },
       {
         passage: "W: Now we'll move on to a special segment of our news program where we highlight new local businesses for our viewers. Today I'm talking with Dhruv Bajaj— a personal trainer and gym owner. Thanks for coming into the studio today, Dhruv!\nM: Thanks for having me! I'm excited to tell you about the gym I just opened last month. It has state-of-the-art equipment, and my trainers can work with clients at any stage in their fitness journey.\nW: Sounds great. How did you get started in this line of work?\nM: Well, I was an athlete in school, and when I stopped competing, I wanted to continue doing something fitness-related. So I started working as a trainer.",
         questions: [
-          { id: 47, question: "What type of program are the speakers on?", options: ["A news show", "A cooking show", "A radio talk show", "A documentary"], answer: 0 },
-          { id: 48, question: "What does the man say about his gym?", options: ["It has modern equipment", "It offers free classes", "It is expanding soon", "It has low membership fees"], answer: 0 },
-          { id: 49, question: "What did the man do before becoming a trainer?", options: ["He was a doctor", "He was an athlete", "He was a teacher", "He managed a restaurant"], answer: 1 }
+          { id: 47, question: "What type of program are the speakers on?", questionVi: "Họ đang tham gia loại chương trình gì?", options: ["A news show", "A cooking show", "A radio talk show", "A documentary"], optionsVi: ["Chương trình tin tức", "Chương trình nấu ăn", "Talk show radio", "Phim tài liệu"], answer: 0 },
+          { id: 48, question: "What does the man say about his gym?", questionVi: "Người đàn ông nói gì về phòng gym?", options: ["It has modern equipment", "It offers free classes", "It is expanding soon", "It has low membership fees"], optionsVi: ["Có thiết bị hiện đại", "Có lớp miễn phí", "Sắp mở rộng", "Phí thành viên thấp"], answer: 0 },
+          { id: 49, question: "What did the man do before becoming a trainer?", options: ["He was a doctor", "He was an athlete", "He was a teacher", "He managed a restaurant"],  questionVi: "Người đàn ông làm gì trước khi trở thành huấn luyện viên?", optionsVi: ["Bác sĩ","Vận động viên","Giáo viên","Quản lý nhà hàng"], answer: 1 }
         ]
       },
       {
         passage: "M1: As director, I'm delighted to welcome you to the Redmond Aquatic Institute. We're happy you'll be producing content for our Web site.\nW: I'm looking forward to writing about Redmond's initiatives in marine biology.\nM1: Yes, the more articles the public can read about threats to aquatic ecosystems, the better. Public awareness will help us get funding to meet our aim of preserving these ecosystems. This is Roberto. He's working on our mangrove research project, which is the first one you'll cover.\nM2: It's an interesting project. And what's exciting is that we've started using drones to photograph the area with the mangroves. So we have some great images you could use.",
         questions: [
-          { id: 50, question: "What will the woman do at the institute?", options: ["Conduct research", "Write web content", "Manage funding", "Train new staff"], answer: 1 },
-          { id: 51, question: "What is the institute's goal?", options: ["To preserve aquatic ecosystems", "To develop new technology", "To train marine biologists", "To build a new facility"], answer: 0 },
-          { id: 52, question: "What does Roberto offer?", options: ["Research assistance", "Drone photographs", "A laboratory tour", "Funding information"], answer: 1 }
+          { id: 50, question: "What will the woman do at the institute?", options: ["Conduct research", "Write web content", "Manage funding", "Train new staff"],  questionVi: "Người phụ nữ sẽ làm gì ở viện?", optionsVi: ["Nghiên cứu","Viết nội dung web","Quản lý tài trợ","Đào tạo nhân viên mới"], answer: 1 },
+          { id: 51, question: "What is the institute's goal?", options: ["To preserve aquatic ecosystems", "To develop new technology", "To train marine biologists", "To build a new facility"],  questionVi: "Mục tiêu của viện là gì?", optionsVi: ["Bảo tồn hệ sinh thái thủy sinh","Phát triển công nghệ mới","Đào tạo nhà sinh vật biển","Xây cơ sở mới"], answer: 0 },
+          { id: 52, question: "What does Roberto offer?", options: ["Research assistance", "Drone photographs", "A laboratory tour", "Funding information"],  questionVi: "Roberto cung cấp gì?", optionsVi: ["Hỗ trợ nghiên cứu","Ảnh chụp bằng drone","Tham quan phòng thí nghiệm","Thông tin tài trợ"], answer: 1 }
         ]
       },
       {
         passage: "W: Matthew, you're not planning to cancel Wednesday's budget meeting, are you?\nM: I haven't sent out the cancellation yet, but our research partners in China are off this week for a national holiday, so there's no point in meeting. Why?\nW: Well, I've been looking at the draft budget, and we didn't allocate funds for a project leader.\nM: Uh-oh. I wonder how that happened. You're right. We need to discuss how to fix that.\nW: You know, we allocated money for a trip to Singapore to present our preliminary findings. We don't really need to do that.",
         questions: [
-          { id: 53, question: "What does the woman imply when she says they didn't allocate funds for a project leader?", options: ["A mistake was made", "A meeting should be postponed", "A new employee should be hired", "A scheduled meeting should take place"], answer: 3 },
-          { id: 54, question: "Why was the man going to cancel the meeting?", options: ["Partners are on holiday", "The budget is not ready", "A speaker is unavailable", "The room is booked"], answer: 0 },
-          { id: 55, question: "What does the woman suggest?", options: ["Hiring a consultant", "Eliminating a trip expense", "Postponing the project", "Requesting more funding"], answer: 1 }
+          { id: 53, question: "What does the woman imply when she says they didn't allocate funds for a project leader?", options: ["A mistake was made", "A meeting should be postponed", "A new employee should be hired", "A scheduled meeting should take place"],  questionVi: "Người phụ nữ muốn nói gì khi nói không phân bổ kinh phí cho trưởng dự án?", optionsVi: ["Có sai sót","Nên hoãn cuộc họp","Nên tuyển nhân viên mới","Cuộc họp nên diễn ra"], answer: 3 },
+          { id: 54, question: "Why was the man going to cancel the meeting?", options: ["Partners are on holiday", "The budget is not ready", "A speaker is unavailable", "The room is booked"],  questionVi: "Tại sao người đàn ông định hủy cuộc họp?", optionsVi: ["Đối tác đang nghỉ lễ","Ngân sách chưa sẵn sàng","Diễn giả không có mặt","Phòng đã được đặt"], answer: 0 },
+          { id: 55, question: "What does the woman suggest?", options: ["Hiring a consultant", "Eliminating a trip expense", "Postponing the project", "Requesting more funding"],  questionVi: "Người phụ nữ gợi ý gì?", optionsVi: ["Thuê tư vấn","Bỏ chi phí chuyến đi","Hoãn dự án","Yêu cầu thêm kinh phí"], answer: 1 }
         ]
       },
       {
         passage: "M: Hello, you've reached tech support.\nW: I'm calling from Rubin Restaurant Equipment. I recently purchased your software to keep track of my warehouse inventory, and I have a question about setting alerts.\nM: Sure. How can I help?\nW: Well, we've been getting an alert whenever the inventory for our deep fryers drops below ten. But we usually don't stock many of those because restaurants don't often need to replace them. So, can I lower the alert level for just those items?\nM: Yes. In the system, if you click on that product, you'll see a link that says, \"Set Custom Alert.\" And you can set it to any number from there.\nW: I see it. Thanks for your help.",
         questions: [
-          { id: 56, question: "What type of business does the woman work for?", options: ["A restaurant", "An equipment company", "A software firm", "A delivery service"], answer: 1 },
-          { id: 57, question: "What problem does the woman describe?", options: ["Unnecessary alerts", "Missing inventory", "Slow software", "Incorrect pricing"], answer: 0 },
-          { id: 58, question: "What does the man tell the woman to do?", options: ["Click on the product to set a custom alert", "Call back later", "Update the software", "Send an e-mail request"], answer: 0 }
+          { id: 56, question: "What type of business does the woman work for?", options: ["A restaurant", "An equipment company", "A software firm", "A delivery service"],  questionVi: "Người phụ nữ làm ở loại doanh nghiệp nào?", optionsVi: ["Nhà hàng","Công ty thiết bị","Công ty phần mềm","Dịch vụ giao hàng"], answer: 1 },
+          { id: 57, question: "What problem does the woman describe?", options: ["Unnecessary alerts", "Missing inventory", "Slow software", "Incorrect pricing"],  questionVi: "Người phụ nữ mô tả vấn đề gì?", optionsVi: ["Cảnh báo không cần thiết","Hàng tồn kho bị mất","Phần mềm chậm","Giá sai"], answer: 0 },
+          { id: 58, question: "What does the man tell the woman to do?", options: ["Click on the product to set a custom alert", "Call back later", "Update the software", "Send an e-mail request"],  questionVi: "Người đàn ông bảo người phụ nữ làm gì?", optionsVi: ["Nhấp vào sản phẩm để đặt cảnh báo tùy chỉnh","Gọi lại sau","Cập nhật phần mềm","Gửi email yêu cầu"], answer: 0 }
         ]
       },
       {
         passage: "M: I just spoke to the garden director. He wants us to install an irrigation system in the rose garden as well as the magnolia grove. He wants to be sure the flowers get plenty of water during the hot summer months.\nW: OK, let's walk over there now and take some measurements. Then we can figure out what materials we'll need.\nM: Sure. We have some extra parts left over from when we worked on the cherry trees. I'll check what we have left after we finish measuring the rose garden.",
         questions: [
-          { id: 59, question: "What project are the speakers working on?", options: ["Installing an irrigation system", "Building a greenhouse", "Planting new trees", "Designing a park"], answer: 0 },
-          { id: 60, question: "What will the speakers do next?", options: ["Take measurements", "Order materials", "Meet with the director", "Review a budget"], answer: 0 },
-          { id: 61, question: "What does the man mention about extra parts?", options: ["They were left over from a previous job", "They need to be returned", "They were recently ordered", "They are too expensive"], answer: 0 }
+          { id: 59, question: "What project are the speakers working on?", options: ["Installing an irrigation system", "Building a greenhouse", "Planting new trees", "Designing a park"],  questionVi: "Họ đang làm dự án gì?", optionsVi: ["Lắp hệ thống tưới","Xây nhà kính","Trồng cây mới","Thiết kế công viên"], answer: 0 },
+          { id: 60, question: "What will the speakers do next?", options: ["Take measurements", "Order materials", "Meet with the director", "Review a budget"],  questionVi: "Họ sẽ làm gì tiếp theo?", optionsVi: ["Đo đạc","Đặt vật liệu","Gặp giám đốc","Xem ngân sách"], answer: 0 },
+          { id: 61, question: "What does the man mention about extra parts?", options: ["They were left over from a previous job", "They need to be returned", "They were recently ordered", "They are too expensive"],  questionVi: "Người đàn ông nói gì về phụ tùng thừa?", optionsVi: ["Còn từ công việc trước","Cần trả lại","Mới đặt gần đây","Quá đắt"], answer: 0 }
         ]
       },
       {
         passage: "M: Good morning, Ms. Aljohani. Sorry I'm a little late. Traffic was terrible.\nW: That's OK, but our rental office will be very busy this morning. There's a big education convention in town starting today, and a lot of attendees from out of town have reserved cars to get to the conference center.\nM: Right. What do you want me to do first?\nW: I'd like you to start by checking the batteries in our electric cars. We want to be sure they're all fully charged.",
         questions: [
-          { id: 62, question: "Where do the speakers work?", options: ["At a car rental office", "At a hotel", "At a convention center", "At a car dealership"], answer: 0 },
-          { id: 63, question: "Why will the office be busy?", options: ["A convention is starting", "A holiday sale is happening", "New cars have arrived", "The office is relocating"], answer: 0 },
-          { id: 64, question: "What does the woman ask the man to do first?", options: ["Check car batteries", "Greet customers", "Update the reservation system", "Clean the vehicles"], answer: 0 }
+          { id: 62, question: "Where do the speakers work?", options: ["At a car rental office", "At a hotel", "At a convention center", "At a car dealership"],  questionVi: "Họ làm ở đâu?", optionsVi: ["Văn phòng cho thuê xe","Khách sạn","Trung tâm hội nghị","Đại lý ô tô"], answer: 0 },
+          { id: 63, question: "Why will the office be busy?", options: ["A convention is starting", "A holiday sale is happening", "New cars have arrived", "The office is relocating"],  questionVi: "Tại sao văn phòng sẽ bận?", optionsVi: ["Hội nghị sắp bắt đầu","Đang có đợt giảm giá","Xe mới đã đến","Văn phòng đang chuyển chỗ"], answer: 0 },
+          { id: 64, question: "What does the woman ask the man to do first?", options: ["Check car batteries", "Greet customers", "Update the reservation system", "Clean the vehicles"],  questionVi: "Người phụ nữ yêu cầu người đàn ông làm gì trước?", optionsVi: ["Kiểm tra pin xe","Đón khách","Cập nhật hệ thống đặt chỗ","Rửa xe"], answer: 0 }
         ]
       },
       {
         passage: "M: I've been on vacation, so I missed our department's meeting. Can you give me an update?\nW: Well, all our public programs and community events are on schedule.\nM: Great! How about the Jannis Park project? We're still planning on planting trees best suited for residential areas, right?\nW: That's right. I'm working on the public education part now. There'll be a children's poster competition next month, which the city mayor will judge.\nM: Interesting. Is there a prize?\nW: The winner will get a ribbon. But all participants will get a seedling to plant at home. We'll be giving away the tallest of these four varieties, since it was the most popular in a survey of our residents.",
         questions: [
-          { id: 65, question: "What department do the speakers most likely work in?", options: ["Parks and recreation", "Finance", "Human resources", "Marketing"], answer: 0 },
-          { id: 66, question: "What will happen next month?", options: ["A poster competition", "A tree planting event", "A department meeting", "A community survey"], answer: 0 },
-          { id: 67, question: "How was the seedling variety chosen?", options: ["Through a resident survey", "By the city mayor", "Based on cost", "By a committee vote"], answer: 0 }
+          { id: 65, question: "What department do the speakers most likely work in?", options: ["Parks and recreation", "Finance", "Human resources", "Marketing"],  questionVi: "Họ có thể làm ở bộ phận nào?", optionsVi: ["Công viên và giải trí","Tài chính","Nhân sự","Marketing"], answer: 0 },
+          { id: 66, question: "What will happen next month?", options: ["A poster competition", "A tree planting event", "A department meeting", "A community survey"],  questionVi: "Điều gì sẽ xảy ra tháng tới?", optionsVi: ["Cuộc thi vẽ poster","Sự kiện trồng cây","Cuộc họp bộ phận","Khảo sát cộng đồng"], answer: 0 },
+          { id: 67, question: "How was the seedling variety chosen?", options: ["Through a resident survey", "By the city mayor", "Based on cost", "By a committee vote"],  questionVi: "Giống cây con được chọn như thế nào?", optionsVi: ["Qua khảo sát cư dân","Do thị trưởng chọn","Dựa trên chi phí","Bỏ phiếu ủy ban"], answer: 0 }
         ]
       },
       {
         passage: "M: Hi, I'd like a large black coffee and an egg-and-cheese croissant, please.\nW: Sure. That'll be eight dollars. Are you a Shelby's preferred customer?\nM: Uh, no I'm not. But I do have an EZ-Cash card.\nW: Great. Let me ring that up for you.\nM: By the way, I'd like to order breakfast for my team tomorrow morning. Can I place that order ahead of time?\nW: Sure. Would you like to do that now?\nM: No, I'll call you later today when I know what everyone wants. Thanks for the information.",
         questions: [
-          { id: 68, question: "Where does the conversation take place?", options: ["At a café", "At a grocery store", "At a hotel", "At an office"], answer: 0 },
-          { id: 69, question: "What does the man want to do for tomorrow?", options: ["Order breakfast for his team", "Reserve a table", "Schedule a delivery", "Pick up a cake"], answer: 0 },
-          { id: 70, question: "What will the man do later today?", options: ["Call to place an order", "Send an e-mail", "Visit another location", "Meet with his team"], answer: 0 }
+          { id: 68, question: "Where does the conversation take place?", options: ["At a café", "At a grocery store", "At a hotel", "At an office"],  questionVi: "Cuộc trò chuyện diễn ra ở đâu?", optionsVi: ["Quán cà phê","Cửa hàng tạp hóa","Khách sạn","Văn phòng"], answer: 0 },
+          { id: 69, question: "What does the man want to do for tomorrow?", options: ["Order breakfast for his team", "Reserve a table", "Schedule a delivery", "Pick up a cake"],  questionVi: "Người đàn ông muốn làm gì cho ngày mai?", optionsVi: ["Đặt bữa sáng cho nhóm","Đặt bàn","Lên lịch giao hàng","Lấy bánh"], answer: 0 },
+          { id: 70, question: "What will the man do later today?", options: ["Call to place an order", "Send an e-mail", "Visit another location", "Meet with his team"],  questionVi: "Người đàn ông sẽ làm gì sau hôm nay?", optionsVi: ["Gọi đặt hàng","Gửi email","Đến chi nhánh khác","Gặp nhóm"], answer: 0 }
         ]
       }
     ],
@@ -1024,81 +1218,81 @@ const listenTests = {
       {
         passage: "Hi, Amina. This is Sabine calling from Blue Drop Creations. I just put the earrings and necklaces that you ordered from me in the mail. Because you've been a customer for over ten years, I've also included a special gift in the package for you. It's a case for your jewelry. This is a new product that I'm starting to offer, so please call me back after you receive it. I'd really like to hear your thoughts on it.",
         questions: [
-          { id: 71, question: "What type of products does the speaker sell?", options: ["Jewelry", "Clothing", "Electronics", "Furniture"], answer: 0 },
-          { id: 72, question: "Why did the speaker include a gift?", options: ["The customer has been loyal for years", "It is a holiday promotion", "The order was delayed", "It is a new customer welcome gift"], answer: 0 },
-          { id: 73, question: "What does the speaker ask the listener to do?", options: ["Provide feedback", "Visit a store", "Place another order", "Update contact information"], answer: 0 }
+          { id: 71, question: "What type of products does the speaker sell?", options: ["Jewelry", "Clothing", "Electronics", "Furniture"],  questionVi: "Người nói bán loại sản phẩm gì?", optionsVi: ["Trang sức","Quần áo","Điện tử","Nội thất"], answer: 0 },
+          { id: 72, question: "Why did the speaker include a gift?", options: ["The customer has been loyal for years", "It is a holiday promotion", "The order was delayed", "It is a new customer welcome gift"],  questionVi: "Tại sao người nói tặng quà?", optionsVi: ["Khách hàng trung thành nhiều năm","Chương trình khuyến mãi lễ","Đơn hàng bị trì hoãn","Quà chào mừng khách mới"], answer: 0 },
+          { id: 73, question: "What does the speaker ask the listener to do?", options: ["Provide feedback", "Visit a store", "Place another order", "Update contact information"],  questionVi: "Người nói yêu cầu người nghe làm gì?", optionsVi: ["Đưa phản hồi","Ghé cửa hàng","Đặt thêm hàng","Cập nhật thông tin liên hệ"], answer: 0 }
         ]
       },
       {
         passage: "Good morning, this is Brandon from Dakota Framing Company, returning your call. We received your voicemail about wanting to frame a wedding picture. There is no need to print the photo yourself. We prefer that you e-mail us a digital copy. So, to answer your question, you can complete the whole order online. Just visit our Web site, where you'll fill in your choices for photo size and the frame and upload your photo. And for a small extra cost, we'll guarantee to replace your frame in case of damage. Please be sure to check that box when you order.",
         questions: [
-          { id: 74, question: "Why is the speaker calling?", options: ["To return a call", "To confirm an order", "To schedule a delivery", "To offer a discount"], answer: 0 },
-          { id: 75, question: "What does the speaker say about the photo?", options: ["A digital copy should be e-mailed", "It must be a certain size", "It should be printed on special paper", "It needs to be dropped off in person"], answer: 0 },
-          { id: 76, question: "What does the speaker recommend?", options: ["Purchasing damage protection", "Choosing a larger frame", "Visiting the store", "Using a coupon code"], answer: 0 }
+          { id: 74, question: "Why is the speaker calling?", options: ["To return a call", "To confirm an order", "To schedule a delivery", "To offer a discount"],  questionVi: "Tại sao người nói gọi điện?", optionsVi: ["Để gọi lại","Để xác nhận đơn hàng","Để lên lịch giao hàng","Để giảm giá"], answer: 0 },
+          { id: 75, question: "What does the speaker say about the photo?", options: ["A digital copy should be e-mailed", "It must be a certain size", "It should be printed on special paper", "It needs to be dropped off in person"],  questionVi: "Người nói nói gì về ảnh?", optionsVi: ["Nên gửi bản số email","Phải có kích thước nhất định","Nên in trên giấy đặc biệt","Cần mang đến trực tiếp"], answer: 0 },
+          { id: 76, question: "What does the speaker recommend?", options: ["Purchasing damage protection", "Choosing a larger frame", "Visiting the store", "Using a coupon code"],  questionVi: "Người nói khuyên điều gì?", optionsVi: ["Mua bảo hiểm hư hỏng","Chọn khung lớn hơn","Đến cửa hàng","Dùng mã giảm giá"], answer: 0 }
         ]
       },
       {
         passage: "Welcome all to this week's training in our series of patient care programs. Our physical therapy center is known for the excellent care we provide to our patients, and that's because of you, our staff. The training today will be about ways to engage the patients who reside in our facility through playing games. I've prepared different types of activities for us to try out, including some games that involve mental stimulation as well as physical exercises. But, I have to let you know that today I must leave at noon. Next week we'll try out more of the games.",
         questions: [
-          { id: 77, question: "Where does the speaker most likely work?", options: ["At a physical therapy center", "At a school", "At a gym", "At a hospital emergency room"], answer: 0 },
-          { id: 78, question: "What is today's training about?", options: ["Engaging patients through games", "New medical procedures", "Safety protocols", "Customer service skills"], answer: 0 },
-          { id: 79, question: "What does the speaker imply when she says she must leave at noon?", options: ["Some materials will not be covered", "The listeners should arrive early", "A schedule change has been made", "The training was extended"], answer: 0 }
+          { id: 77, question: "Where does the speaker most likely work?", options: ["At a physical therapy center", "At a school", "At a gym", "At a hospital emergency room"],  questionVi: "Người nói có thể làm ở đâu?", optionsVi: ["Trung tâm vật lý trị liệu","Trường học","Phòng gym","Phòng cấp cứu bệnh viện"], answer: 0 },
+          { id: 78, question: "What is today's training about?", options: ["Engaging patients through games", "New medical procedures", "Safety protocols", "Customer service skills"],  questionVi: "Buổi đào tạo hôm nay về gì?", optionsVi: ["Gắn kết bệnh nhân qua trò chơi","Quy trình y tế mới","Quy tắc an toàn","Kỹ năng dịch vụ khách hàng"], answer: 0 },
+          { id: 79, question: "What does the speaker imply when she says she must leave at noon?", options: ["Some materials will not be covered", "The listeners should arrive early", "A schedule change has been made", "The training was extended"],  questionVi: "Người nói muốn nói gì khi nói phải rời lúc trưa?", optionsVi: ["Một số nội dung sẽ không được đề cập","Người nghe nên đến sớm","Lịch trình đã thay đổi","Buổi đào tạo đã được kéo dài"], answer: 0 }
         ]
       },
       {
         passage: "Are you a certified commercial truck driver? Hoffman Oversized Haulers is currently looking for experienced truck drivers to join our team. As our name suggests, we transport oversized cargo throughout the region. With Hoffman, drivers enjoy flexible scheduling. In fact, we're the only company in the region that allows employees to determine their own work hours. If you don't have experience working with oversized loads, training is available. Please check out our Web site to learn more about our open positions. We can't wait to work with you.",
         questions: [
-          { id: 80, question: "What is being advertised?", options: ["Truck driving jobs", "A delivery service", "A training program", "A vehicle sale"], answer: 0 },
-          { id: 81, question: "What benefit does the company offer?", options: ["Flexible scheduling", "Free meals", "Company housing", "Health insurance"], answer: 0 },
-          { id: 82, question: "What is available for inexperienced drivers?", options: ["Training", "A mentor program", "A reduced workload", "A signing bonus"], answer: 0 }
+          { id: 80, question: "What is being advertised?", options: ["Truck driving jobs", "A delivery service", "A training program", "A vehicle sale"],  questionVi: "Quảng cáo gì?", optionsVi: ["Việc lái xe tải","Dịch vụ giao hàng","Chương trình đào tạo","Bán xe"], answer: 0 },
+          { id: 81, question: "What benefit does the company offer?", options: ["Flexible scheduling", "Free meals", "Company housing", "Health insurance"],  questionVi: "Công ty có lợi ích gì?", optionsVi: ["Lịch làm việc linh hoạt","Bữa ăn miễn phí","Nhà ở công ty","Bảo hiểm sức khỏe"], answer: 0 },
+          { id: 82, question: "What is available for inexperienced drivers?", options: ["Training", "A mentor program", "A reduced workload", "A signing bonus"],  questionVi: "Có gì dành cho tài xế chưa có kinh nghiệm?", optionsVi: ["Đào tạo","Chương trình hướng dẫn","Giảm khối lượng công việc","Thưởng ký hợp đồng"], answer: 0 }
         ]
       },
       {
         passage: "Hi, Jinyu. I have some exciting news! The Farmer's Table television program wants to feature our restaurant in an upcoming episode. They'll be coming on Wednesday to film everyone at work in the kitchen during our dinner service. Since you're the executive chef, I'll need you to come in earlier than usual to get everything prepped and set up. And just as a reminder, I'm still planning to be out of town next week for the Springdale Pastry and Dessert Festival. Thanks!",
         questions: [
-          { id: 83, question: "What is the exciting news?", options: ["A TV show will feature the restaurant", "A new menu is launching", "A famous chef is visiting", "The restaurant won an award"], answer: 0 },
-          { id: 84, question: "What does the speaker ask Jinyu to do?", options: ["Arrive early on Wednesday", "Prepare a special menu", "Contact the TV crew", "Train new staff"], answer: 0 },
-          { id: 85, question: "What will the speaker do next week?", options: ["Attend a festival", "Open a new location", "Take a cooking class", "Meet with investors"], answer: 0 }
+          { id: 83, question: "What is the exciting news?", options: ["A TV show will feature the restaurant", "A new menu is launching", "A famous chef is visiting", "The restaurant won an award"],  questionVi: "Tin vui là gì?", optionsVi: ["Chương trình TV sẽ giới thiệu nhà hàng","Menu mới ra mắt","Đầu bếp nổi tiếng đến thăm","Nhà hàng đoạt giải"], answer: 0 },
+          { id: 84, question: "What does the speaker ask Jinyu to do?", options: ["Arrive early on Wednesday", "Prepare a special menu", "Contact the TV crew", "Train new staff"],  questionVi: "Người nói yêu cầu Jinyu làm gì?", optionsVi: ["Đến sớm thứ Tư","Chuẩn bị menu đặc biệt","Liên hệ đoàn quay phim","Đào tạo nhân viên mới"], answer: 0 },
+          { id: 85, question: "What will the speaker do next week?", options: ["Attend a festival", "Open a new location", "Take a cooking class", "Meet with investors"],  questionVi: "Người nói sẽ làm gì tuần tới?", optionsVi: ["Tham dự lễ hội","Mở chi nhánh mới","Học nấu ăn","Gặp nhà đầu tư"], answer: 0 }
         ]
       },
       {
         passage: "Good evening and thank you for watching Channel Four News. I'm here in Rockville, a suburb in the metropolitan area. Rockville was recently chosen as the site of a multimillion-dollar electric vehicle battery factory. This project promises to bring thousands of jobs, both directly and indirectly, to the surrounding community. At a recent well-attended public comment meeting, residents had a chance to voice any opposition to the project. No one made any comments. To learn more about this exciting development, artists-rendered images of the project are on display at the city hall building.",
         questions: [
-          { id: 86, question: "What is being reported?", options: ["A new factory is planned", "A road is being built", "A park is opening", "An election result"], answer: 0 },
-          { id: 87, question: "What happened at the public comment meeting?", options: ["No one opposed the project", "The project was delayed", "Residents requested changes", "A vote was held"], answer: 0 },
-          { id: 88, question: "Where can people view images of the project?", options: ["At city hall", "On a Web site", "At the factory site", "In a newspaper"], answer: 0 }
+          { id: 86, question: "What is being reported?", options: ["A new factory is planned", "A road is being built", "A park is opening", "An election result"],  questionVi: "Tin gì đang được đưa?", optionsVi: ["Nhà máy mới được lên kế hoạch","Đường đang được xây","Công viên khai trương","Kết quả bầu cử"], answer: 0 },
+          { id: 87, question: "What happened at the public comment meeting?", options: ["No one opposed the project", "The project was delayed", "Residents requested changes", "A vote was held"],  questionVi: "Điều gì xảy ra tại cuộc họp lấy ý kiến?", optionsVi: ["Không ai phản đối dự án","Dự án bị hoãn","Cư dân yêu cầu thay đổi","Cuộc bỏ phiếu đã diễn ra"], answer: 0 },
+          { id: 88, question: "Where can people view images of the project?", options: ["At city hall", "On a Web site", "At the factory site", "In a newspaper"],  questionVi: "Mọi người có thể xem hình ảnh dự án ở đâu?", optionsVi: ["Tòa thị chính","Trên trang web","Tại công trường","Trên báo"], answer: 0 }
         ]
       },
       {
         passage: "Tired of losing things on your desk because it's too cluttered? If so, the Optimum Space Organizer is the perfect product for you. Designed with office employees like you in mind, this product can make even the messiest of desks look neat again. Best of all, the organizer adjusts to any sized space you may have on your desk. It can be as narrow or as wide as you need it to be — within seconds! If you call in the next ten minutes, you'll receive a 30 percent discount!",
         questions: [
-          { id: 89, question: "What is being advertised?", options: ["A desk organizer", "An office chair", "A filing cabinet", "A computer monitor"], answer: 0 },
-          { id: 90, question: "What feature does the product have?", options: ["It adjusts to any size", "It comes in many colors", "It includes a lamp", "It is made of wood"], answer: 0 },
-          { id: 91, question: "What special offer is mentioned?", options: ["A 30 percent discount", "Free shipping", "A buy-one-get-one deal", "A free trial period"], answer: 0 }
+          { id: 89, question: "What is being advertised?", options: ["A desk organizer", "An office chair", "A filing cabinet", "A computer monitor"],  questionVi: "Quảng cáo gì?", optionsVi: ["Hộp đựng đồ bàn làm việc","Ghế văn phòng","Tủ hồ sơ","Màn hình máy tính"], answer: 0 },
+          { id: 90, question: "What feature does the product have?", options: ["It adjusts to any size", "It comes in many colors", "It includes a lamp", "It is made of wood"],  questionVi: "Sản phẩm có tính năng gì?", optionsVi: ["Điều chỉnh mọi kích thước","Có nhiều màu","Có đèn kèm","Làm bằng gỗ"], answer: 0 },
+          { id: 91, question: "What special offer is mentioned?", options: ["A 30 percent discount", "Free shipping", "A buy-one-get-one deal", "A free trial period"],  questionVi: "Ưu đãi đặc biệt nào được nhắc đến?", optionsVi: ["Giảm 30 phần trăm","Miễn phí vận chuyển","Mua một tặng một","Dùng thử miễn phí"], answer: 0 }
         ]
       },
       {
         passage: "Thanks for listening to this episode of Fabulous Foods. Every week, we discuss a different vegetable and ways to cook with it to maximize flavor. Now, before we get started, I'm excited to announce that I've been collaborating with Cartwell Kitchen Supplies to develop a new line of cookware. It'll be released in November, but it's available for pre-order right now. Keep in mind, this product line will not be available for long. OK, let's move on to our program. With us today is renowned chef Rebecca Murray to talk about this week's vegetable: eggplant! Rebecca recently launched a vegetarian restaurant in New York that is getting rave reviews so far.",
         questions: [
-          { id: 92, question: "What type of program is Fabulous Foods?", options: ["A cooking show", "A travel show", "A news program", "A science podcast"], answer: 0 },
-          { id: 93, question: "What is available for pre-order?", options: ["Cookware", "A cookbook", "Kitchen appliances", "Meal kits"], answer: 0 },
-          { id: 94, question: "What has Rebecca Murray recently done?", options: ["Opened a restaurant", "Published a book", "Won a competition", "Started a food blog"], answer: 0 }
+          { id: 92, question: "What type of program is Fabulous Foods?", options: ["A cooking show", "A travel show", "A news program", "A science podcast"],  questionVi: "Fabulous Foods là loại chương trình gì?", optionsVi: ["Chương trình nấu ăn","Chương trình du lịch","Chương trình tin tức","Podcast khoa học"], answer: 0 },
+          { id: 93, question: "What is available for pre-order?", options: ["Cookware", "A cookbook", "Kitchen appliances", "Meal kits"],  questionVi: "Sản phẩm nào có thể đặt trước?", optionsVi: ["Dụng cụ nấu ăn","Sách nấu ăn","Thiết bị nhà bếp","Bộ nguyên liệu"], answer: 0 },
+          { id: 94, question: "What has Rebecca Murray recently done?", options: ["Opened a restaurant", "Published a book", "Won a competition", "Started a food blog"],  questionVi: "Rebecca Murray gần đây đã làm gì?", optionsVi: ["Mở nhà hàng","Xuất bản sách","Thắng cuộc thi","Lập blog ẩm thực"], answer: 0 }
         ]
       },
       {
         passage: "Attention passengers. Renovation work to upgrade and modernize our train station is underway. We apologize for the inconvenience the construction noise may cause. Please note that regional train schedules are not affected. Train 133 with service to Washington, D.C., will be arriving shortly. All passengers to Washington, please proceed to Track 26B. If you need assistance handling your baggage, please speak to a ticket agent immediately. Train 133's next stop will be Wilmington, followed by Baltimore and then Washington, D.C.",
         questions: [
-          { id: 95, question: "What is happening at the train station?", options: ["Renovation work", "A schedule change", "A security check", "A special event"], answer: 0 },
-          { id: 96, question: "What should passengers to Washington do?", options: ["Go to Track 26B", "Wait in the lobby", "Check the schedule board", "Contact customer service"], answer: 0 },
-          { id: 97, question: "What is Train 133's next stop?", options: ["Wilmington", "Baltimore", "Washington, D.C.", "Rockville"], answer: 0 }
+          { id: 95, question: "What is happening at the train station?", options: ["Renovation work", "A schedule change", "A security check", "A special event"],  questionVi: "Chuyện gì đang xảy ra ở ga tàu?", optionsVi: ["Công trình cải tạo","Thay đổi lịch trình","Kiểm tra an ninh","Sự kiện đặc biệt"], answer: 0 },
+          { id: 96, question: "What should passengers to Washington do?", options: ["Go to Track 26B", "Wait in the lobby", "Check the schedule board", "Contact customer service"],  questionVi: "Hành khách đến Washington nên làm gì?", optionsVi: ["Đi đến ke 26B","Chờ ở sảnh","Kiểm tra bảng lịch trình","Liên hệ dịch vụ khách hàng"], answer: 0 },
+          { id: 97, question: "What is Train 133's next stop?", options: ["Wilmington", "Baltimore", "Washington, D.C.", "Rockville"],  questionVi: "Điểm dừng tiếp theo của tàu 133 là gì?", optionsVi: ["Wilmington","Baltimore","Washington, D.C.","Rockville"], answer: 0 }
         ]
       },
       {
         passage: "Hello, everyone. I'm Carmen Salazar, the airport operations director, and I wanted to thank you for attending this press conference. As of this week, construction on the new regional airport is proceeding on schedule for two of the three terminals. Minor design adjustments to terminal A have put the project slightly behind schedule, and we anticipate about two months will be added to the construction time frame as a result. I'd also like to mention that we now have a 3-D printed model of this project! Please feel free to visit our Web site so you can view it.",
         questions: [
-          { id: 98, question: "Who is the speaker?", options: ["An airport operations director", "A city council member", "A construction worker", "A travel agent"], answer: 0 },
-          { id: 99, question: "What problem is mentioned about terminal A?", options: ["Design changes caused a delay", "Construction costs increased", "Materials were unavailable", "Workers went on strike"], answer: 0 },
-          { id: 100, question: "What is available on the Web site?", options: ["A 3-D model of the project", "Flight schedules", "Job applications", "Ticket prices"], answer: 0 }
+          { id: 98, question: "Who is the speaker?", options: ["An airport operations director", "A city council member", "A construction worker", "A travel agent"],  questionVi: "Người nói là ai?", optionsVi: ["Giám đốc vận hành sân bay","Thành viên hội đồng","Công nhân xây dựng","Đại lý du lịch"], answer: 0 },
+          { id: 99, question: "What problem is mentioned about terminal A?", options: ["Design changes caused a delay", "Construction costs increased", "Materials were unavailable", "Workers went on strike"],  questionVi: "Vấn đề gì được đề cập về nhà ga A?", optionsVi: ["Thay đổi thiết kế gây chậm trễ","Chi phí xây dựng tăng","Vật liệu không có sẵn","Công nhân đình công"], answer: 0 },
+          { id: 100, question: "What is available on the Web site?", options: ["A 3-D model of the project", "Flight schedules", "Job applications", "Ticket prices"],  questionVi: "Có gì trên trang web?", optionsVi: ["Mô hình 3D của dự án","Lịch bay","Đơn xin việc","Giá vé"], answer: 0 }
         ]
       }
     ]

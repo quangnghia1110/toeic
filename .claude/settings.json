@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node add_translations.js)",
+      "Bash(node -e \"require\\(''./js/data_listen.js''\\); console.log\\(''OK''\\);\")"
+    ]
+  }
+}
