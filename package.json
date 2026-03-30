@@ -1,0 +1,11 @@
+{
+  "name": "toeic-practice",
+  "version": "1.0.0",
+  "description": "TOEIC Part 5 Practice Tool",
+  "scripts": {
+    "start": "npx serve -s . -l $PORT"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

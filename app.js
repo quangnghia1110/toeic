@@ -1,5 +1,28 @@
 const letters = ['A','B','C','D'];
 
+/* ========== TOEIC SCORE CONVERSION TABLE (SPKT 2021) ========== */
+// Index = số câu đúng (0-100), value = [điểm nghe, điểm đọc]
+const TOEIC_SCORE_TABLE = [
+  [5,5],[5,5],[5,5],[5,5],[5,5],[5,5],[5,5],[10,5],[15,5],[20,5],        // 0-9
+  [25,10],[30,15],[35,20],[40,25],[45,30],[50,35],[55,40],[60,45],[65,50],[70,55], // 10-19
+  [75,60],[80,65],[85,70],[90,75],[95,80],[100,90],[105,95],[110,100],[115,110],[120,115], // 20-29
+  [125,120],[135,125],[140,130],[145,135],[150,140],[155,145],[160,150],[165,155],[170,160],[180,170], // 30-39
+  [185,175],[190,180],[195,185],[200,195],[210,200],[220,205],[225,210],[230,220],[235,225],[240,230], // 40-49
+  [245,235],[250,240],[255,250],[260,255],[270,260],[275,270],[280,275],[285,280],[295,285],[300,290], // 50-59
+  [305,295],[310,300],[315,305],[320,310],[325,320],[330,325],[335,330],[340,335],[345,340],[350,345], // 60-69
+  [360,350],[365,355],[370,360],[375,365],[380,370],[390,375],[395,380],[400,385],[405,390],[410,395], // 70-79
+  [420,400],[425,405],[430,405],[435,410],[440,415],[450,420],[455,425],[460,430],[470,435],[480,445], // 80-89
+  [485,450],[490,455],[495,465],[495,470],[495,480],[495,485],[495,490],[495,495],[495,495],[495,495], // 90-99
+  [495,495] // 100
+];
+
+function getToeicScore(correct, total) {
+  const scaled = total > 0 ? Math.round(correct / total * 100) : 0;
+  const idx = Math.min(Math.max(scaled, 0), 100);
+  const [nghe, doc] = TOEIC_SCORE_TABLE[idx];
+  return { nghe, doc, total: nghe + doc, scaled };
+}
+
 /* ========== CUSTOM DIALOG ========== */
 let _cdResolveFn = null;
 let _cdIsPrompt = false;
@@ -494,6 +517,13 @@ function submitTest() {
   document.getElementById('wrongCount').textContent = wrong;
   document.getElementById('totalCount').textContent = total;
   document.getElementById('pctScore').textContent = pct + '%';
+
+  // TOEIC score conversion
+  const toeic = getToeicScore(correct, total);
+  document.getElementById('toeicNghe').textContent = toeic.nghe;
+  document.getElementById('toeicDoc').textContent = toeic.doc;
+  document.getElementById('toeicTotal').textContent = toeic.total;
+  document.getElementById('toeicScaled').textContent = toeic.scaled + '/100';
   document.getElementById('reviewBtn').style.display = '';
   document.getElementById('submitBtn').style.display = 'none';
   saveToHistory();
