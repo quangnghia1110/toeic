@@ -1037,6 +1037,7 @@ function updateVocabCount() {
 let pendingVocabWord = '';
 let pendingVocabTestNum = null;
 let pendingVocabSource = null;
+let pendingVocabListenTest = null;
 
 // Text selection detection on question text
 document.addEventListener('mouseup', function(e) {
@@ -1052,32 +1053,43 @@ document.addEventListener('mouseup', function(e) {
   const anchor = sel.anchorNode;
   if (!anchor) return;
   const parent = anchor.parentElement;
-  const card = parent ? parent.closest('.q-card, .vocab-card, .listen-passage, .lf-sentence-box, .fill-answer-section') : null;
-  if (!card && !parent.closest('.q-text, .option-en, .listen-passage, .lf-sentence, .fill-answer-text, .fill-text')) return;
+  const card = parent ? parent.closest('.q-card, .vocab-card, .listen-passage, .lf-sentence-box, .fill-answer-section, .fill-group-sentence') : null;
+  if (!card && !parent.closest('.q-text, .option-en, .listen-passage, .lf-sentence, .fill-answer-text, .fill-text, .fill-group-sentence')) return;
 
   // Detect which test this word belongs to
   pendingVocabTestNum = null;
   pendingVocabSource = null;
-  const qCard = (card || parent.closest('.q-card'));
-  if (qCard && qCard.id) {
-    const prefix = qCard.id.split('-')[0]; // 'q', 'hr', 'bm'
-    const qIdx = parseInt(qCard.id.split('-')[1]);
-    if (prefix === 'q' && !isNaN(qIdx) && filtered[qIdx]) {
-      pendingVocabTestNum = filtered[qIdx].testNum;
-      pendingVocabSource = filtered[qIdx].source;
-    } else if (prefix === 'hr' || prefix === 'bm') {
-      // Try to get from the card's data
-      const qNumEl = qCard.querySelector('.q-num');
-      if (qNumEl) {
-        const txt = qNumEl.textContent; // e.g. "Test 1 · Q101"
-        // Try to find testNum from allQuestions
-        const match = txt.match(/Q(\d+)/);
-        if (match) {
-          const qNum = parseInt(match[1]);
-          const found = allQuestions.find(q => q.qNum === qNum);
-          if (found) {
-            pendingVocabTestNum = found.testNum;
-            pendingVocabSource = found.source;
+  pendingVocabListenTest = null;
+
+  // Check if selected from listening section
+  const listenEl = parent.closest('#listenPractice, #listenFillView, #listenHistoryReviewView, #listenBookmarkView');
+  if (listenEl) {
+    pendingVocabSource = 'listen';
+    if (typeof fillState !== 'undefined' && fillState.testKey) {
+      pendingVocabListenTest = fillState.testKey;
+    } else if (typeof listenState !== 'undefined' && listenState.currentTest) {
+      pendingVocabListenTest = listenState.currentTest;
+    }
+  } else {
+    const qCard = (card || parent.closest('.q-card'));
+    if (qCard && qCard.id) {
+      const prefix = qCard.id.split('-')[0]; // 'q', 'hr', 'bm'
+      const qIdx = parseInt(qCard.id.split('-')[1]);
+      if (prefix === 'q' && !isNaN(qIdx) && filtered[qIdx]) {
+        pendingVocabTestNum = filtered[qIdx].testNum;
+        pendingVocabSource = filtered[qIdx].source;
+      } else if (prefix === 'hr' || prefix === 'bm') {
+        const qNumEl = qCard.querySelector('.q-num');
+        if (qNumEl) {
+          const txt = qNumEl.textContent;
+          const match = txt.match(/Q(\d+)/);
+          if (match) {
+            const qNum = parseInt(match[1]);
+            const found = allQuestions.find(q => q.qNum === qNum);
+            if (found) {
+              pendingVocabTestNum = found.testNum;
+              pendingVocabSource = found.source;
+            }
           }
         }
       }
@@ -1138,7 +1150,13 @@ function confirmAddVocab() {
   if (!meaning) { showToast('Please enter the meaning!'); return; }
   const vocab = getVocab();
   const entry = { word: pendingVocabWord, meaning: meaning, addedAt: new Date().toISOString() };
-  if (pendingVocabTestNum) { entry.testNum = pendingVocabTestNum; entry.source = pendingVocabSource; }
+  if (pendingVocabSource === 'listen' && pendingVocabListenTest) {
+    entry.source = 'listen';
+    entry.listenTest = pendingVocabListenTest;
+  } else if (pendingVocabTestNum) {
+    entry.testNum = pendingVocabTestNum;
+    entry.source = pendingVocabSource;
+  }
   vocab.push(entry);
   saveVocab(vocab);
   showToast('Added "' + pendingVocabWord + '"!');
@@ -1197,11 +1215,15 @@ function showVocabIndex() {
   const countEl = document.getElementById('fcCountIndex');
   if (countEl) countEl.textContent = vocab.length + ' words';
 
-  // Group vocab by testNum
+  // Group vocab by testNum or listenTest
   const groups = {}; // { testNum: [words] }
+  const listenGroups = {}; // { listenTest: [words] }
   const noTest = []; // words without testNum
   vocab.forEach(v => {
-    if (v.testNum) {
+    if (v.source === 'listen' && v.listenTest) {
+      if (!listenGroups[v.listenTest]) listenGroups[v.listenTest] = [];
+      listenGroups[v.listenTest].push(v);
+    } else if (v.testNum) {
       if (!groups[v.testNum]) groups[v.testNum] = [];
       groups[v.testNum].push(v);
     } else {
@@ -1242,6 +1264,23 @@ function showVocabIndex() {
     });
   });
 
+  // Listening tests
+  const listenKeys = Object.keys(listenGroups).sort();
+  if (listenKeys.length > 0) {
+    html += `<div class="vi-source-label">🎧 Listening</div>`;
+    listenKeys.forEach(key => {
+      const words = listenGroups[key];
+      const testName = (typeof listenFillData !== 'undefined' && listenFillData[key]) ? listenFillData[key].name : key;
+      html += `<div class="vi-test-item" onclick="openVocabActivity('listen_${key}')">
+        <div class="vi-test-info">
+          <span class="vi-test-name">${testName}</span>
+          <span class="vi-test-preview">${words.slice(0, 3).map(w => w.word).join(', ')}${words.length > 3 ? '...' : ''}</span>
+        </div>
+        <span class="vi-test-count">${words.length} words</span>
+      </div>`;
+    });
+  }
+
   // Words without test
   if (noTest.length > 0) {
     html += `<div class="vi-source-label">Uncategorized</div>`;
@@ -1271,7 +1310,10 @@ function openVocabActivity(testNum, mode) {
   if (testNum === null) {
     vocabList = allVocab.slice();
   } else if (testNum === -1) {
-    vocabList = allVocab.filter(v => !v.testNum);
+    vocabList = allVocab.filter(v => !v.testNum && v.source !== 'listen');
+  } else if (typeof testNum === 'string' && testNum.startsWith('listen_')) {
+    const listenKey = testNum.replace('listen_', '');
+    vocabList = allVocab.filter(v => v.source === 'listen' && v.listenTest === listenKey);
   } else {
     vocabList = allVocab.filter(v => v.testNum === testNum);
   }

@@ -30,8 +30,9 @@ function renderListenHome() {
     const fillData = listenFillData[key];
     const f1 = fillData && fillData.part1 ? fillData.part1.length : 0;
     const f2 = fillData && fillData.part2 ? fillData.part2.length : 0;
-    const f3 = fillData && fillData.part3 ? fillData.part3.length : 0;
-    const f4 = fillData && fillData.part4 ? fillData.part4.length : 0;
+    // For part3/part4, show number of groups (passages) if groups are defined, otherwise sentence count
+    const f3 = fillData && fillData.part3 ? (fillData.part3Groups ? fillData.part3Groups.length : fillData.part3.length) : 0;
+    const f4 = fillData && fillData.part4 ? (fillData.part4Groups ? fillData.part4Groups.length : fillData.part4.length) : 0;
     const fAll = f1 + f2 + f3 + f4;
 
     html += `
@@ -427,23 +428,61 @@ function parseFillSentence(text) {
 
 let fillAudio = null;
 
+function groupFillSentences(sentenceList, groups) {
+  // Group consecutive sentences according to the groups array
+  // groups = [5, 4, 3, ...] means first 5 sentences are group 1, next 4 are group 2, etc.
+  const result = [];
+  let offset = 0;
+  for (let g = 0; g < groups.length; g++) {
+    const count = groups[g];
+    const group = [];
+    for (let i = 0; i < count && offset + i < sentenceList.length; i++) {
+      group.push(sentenceList[offset + i]);
+    }
+    if (group.length > 0) result.push(group);
+    offset += count;
+  }
+  // Any remaining sentences (if groups don't cover all)
+  while (offset < sentenceList.length) {
+    result.push([sentenceList[offset]]);
+    offset++;
+  }
+  return result;
+}
+
 function startListenFill(testKey, part) {
   const data = listenFillData[testKey];
   if (!data) return;
 
-  let sentences = [];
-  if (part === 'all') {
-    if (data.part1) data.part1.forEach((s, i) => sentences.push({ data: s, part: 'part1', idx: i }));
-    if (data.part2) data.part2.forEach((s, i) => sentences.push({ data: s, part: 'part2', idx: i }));
-    if (data.part3) data.part3.forEach((s, i) => sentences.push({ data: s, part: 'part3', idx: i }));
-    if (data.part4) data.part4.forEach((s, i) => sentences.push({ data: s, part: 'part4', idx: i }));
-  } else if (data[part]) {
-    data[part].forEach((s, i) => sentences.push({ data: s, part: part, idx: i }));
+  let screens = []; // each screen is { sentences: [{data, part, idx}, ...], isGroup: bool }
+  function addPart(partKey) {
+    const partData = data[partKey];
+    if (!partData) return;
+    const groupsKey = partKey + 'Groups';
+    const groups = data[groupsKey];
+    if ((partKey === 'part3' || partKey === 'part4') && groups) {
+      // Group sentences by passage
+      const allSentences = partData.map((s, i) => ({ data: s, part: partKey, idx: i }));
+      const grouped = groupFillSentences(allSentences, groups);
+      grouped.forEach(g => screens.push({ sentences: g, isGroup: true }));
+    } else {
+      // One sentence per screen (part1/part2)
+      partData.forEach((s, i) => screens.push({ sentences: [{ data: s, part: partKey, idx: i }], isGroup: false }));
+    }
   }
-  if (!sentences.length) return;
+
+  if (part === 'all') {
+    addPart('part1');
+    addPart('part2');
+    addPart('part3');
+    addPart('part4');
+  } else {
+    addPart(part);
+  }
+  if (!screens.length) return;
 
   fillState.testKey = testKey;
-  fillState.sentences = sentences;
+  fillState.sentences = screens;
   fillState.currentIdx = 0;
   fillState.checked = false;
   fillState.results = [];
@@ -548,13 +587,12 @@ document.addEventListener('DOMContentLoaded', initFillAudioEvents);
 
 function renderFillSentence() {
   if (!fillState.sentences || !fillState.sentences.length) return;
-  const entry = fillState.sentences[fillState.currentIdx];
-  if (!entry) return;
-  const text = entry.data[0];
-  const translation = entry.data[1] || '';
-  const parts = parseFillSentence(text);
+  const screen = fillState.sentences[fillState.currentIdx];
+  if (!screen) return;
   const total = fillState.sentences.length;
   const idx = fillState.currentIdx;
+  const isGroup = screen.isGroup;
+  const sentenceList = screen.sentences; // array of {data, part, idx}
 
   // Counter
   document.getElementById('fillCounter').textContent = `${idx + 1}/${total}`;
@@ -562,10 +600,11 @@ function renderFillSentence() {
   // Build sentence with blanks
   const sentenceEl = document.getElementById('fillSentence');
 
-  // Show image for part1
+  // Show image for part1 (only for single sentences in part1)
   const fillImageEl = document.getElementById('fillImage');
   const part1ImageOffset = { "2024_1": 0, "2024_2": 6 };
-  if (entry.part === 'part1') {
+  if (!isGroup && sentenceList.length === 1 && sentenceList[0].part === 'part1') {
+    const entry = sentenceList[0];
     const imgNum = entry.idx + 1 + (part1ImageOffset[fillState.testKey] || 0);
     fillImageEl.innerHTML = `<div class="fill-image"><img src="image/${imgNum}.png" alt="Question ${imgNum}"></div>`;
     fillImageEl.style.display = '';
@@ -573,59 +612,98 @@ function renderFillSentence() {
     fillImageEl.innerHTML = '';
     fillImageEl.style.display = 'none';
   }
+
+  // Parse all sentences and track global blank index
+  let globalBlankIdx = 0;
+  const allParsed = sentenceList.map(entry => {
+    const text = entry.data[0];
+    const rawParts = parseFillSentence(text);
+    // Re-index blanks globally across all sentences in the group
+    const parts = rawParts.map(p => {
+      if (p.type === 'blank') {
+        return { ...p, idx: globalBlankIdx++ };
+      }
+      return p;
+    });
+    return { parts, text, translation: entry.data[1] || '' };
+  });
+
   let html = '';
-  if (!fillState.checked) {
-    // INPUT MODE: render input fields
-    parts.forEach(p => {
-      if (p.type === 'text') {
-        html += `<span class="fill-text">${p.value.replace(/\n/g, '<br>')}</span>`;
-      } else {
-        const width = Math.max(p.word.length * 12, 80);
-        html += `<span class="fill-blank-wrap"><input type="text" class="fill-input" data-idx="${p.idx}" style="width:${width}px;" autocomplete="off" spellcheck="false"></span>`;
-      }
-    });
-  } else {
-    // RESULT MODE: show correct/wrong
-    parts.forEach(p => {
-      if (p.type === 'text') {
-        html += `<span class="fill-text">${p.value.replace(/\n/g, '<br>')}</span>`;
-      } else {
-        const userVal = fillState._savedValues ? (fillState._savedValues[p.idx] || '') : '';
-        const isCorrect = userVal.toLowerCase() === p.word.toLowerCase();
-        if (isCorrect) {
-          html += `<span class="fill-blank-result fill-correct">${p.word}</span>`;
-        } else {
-          html += `<span class="fill-blank-result fill-wrong"><span class="fill-wrong-text">${userVal || '&emsp;&emsp;'}</span> <span class="fill-correct-word">${p.word}</span></span>`;
-        }
-      }
-    });
+  if (isGroup) {
+    html += '<div class="fill-group-label">Passage (' + sentenceList.length + ' sentences)</div>';
   }
+
+  allParsed.forEach((parsed, sIdx) => {
+    if (isGroup) {
+      html += '<div class="fill-group-sentence">';
+    }
+    if (!fillState.checked) {
+      // INPUT MODE
+      parsed.parts.forEach(p => {
+        if (p.type === 'text') {
+          html += `<span class="fill-text">${p.value.replace(/\n/g, '<br>')}</span>`;
+        } else {
+          const width = Math.max(p.word.length * 12, 80);
+          html += `<span class="fill-blank-wrap"><input type="text" class="fill-input" data-idx="${p.idx}" style="width:${width}px;" autocomplete="off" spellcheck="false"></span>`;
+        }
+      });
+    } else {
+      // RESULT MODE
+      parsed.parts.forEach(p => {
+        if (p.type === 'text') {
+          html += `<span class="fill-text">${p.value.replace(/\n/g, '<br>')}</span>`;
+        } else {
+          const userVal = fillState._savedValues ? (fillState._savedValues[p.idx] || '') : '';
+          const isCorrect = userVal.toLowerCase() === p.word.toLowerCase();
+          if (isCorrect) {
+            html += `<span class="fill-blank-result fill-correct">${p.word}</span>`;
+          } else {
+            html += `<span class="fill-blank-result fill-wrong"><span class="fill-wrong-text">${userVal || '&emsp;&emsp;'}</span> <span class="fill-correct-word">${p.word}</span></span>`;
+          }
+        }
+      });
+    }
+    if (isGroup) {
+      html += '</div>';
+    }
+  });
+
   sentenceEl.innerHTML = html;
 
-  // Translation hidden - only shows after KIỂM TRA in answer section
+  // Translation hidden - only shows after check in answer section
   document.getElementById('fillTranslation').innerHTML = '';
 
   // Answer section
   const answerEl = document.getElementById('fillAnswer');
   if (fillState.checked) {
-    // Count results
-    const inputs = sentenceEl.querySelectorAll('.fill-blank-result');
-    const blanks = parts.filter(p => p.type === 'blank');
-    let correct = 0;
-    blanks.forEach((b, i) => {
-      const el = sentenceEl.querySelectorAll('.fill-blank-result')[i];
-      if (el && el.classList.contains('fill-correct')) correct++;
+    // Count total blanks and correct answers
+    let totalBlanks = 0;
+    let correctCount = 0;
+    allParsed.forEach(parsed => {
+      parsed.parts.forEach(p => {
+        if (p.type === 'blank') {
+          totalBlanks++;
+          const userVal = fillState._savedValues ? (fillState._savedValues[p.idx] || '') : '';
+          if (userVal.toLowerCase() === p.word.toLowerCase()) correctCount++;
+        }
+      });
     });
 
+    let answerHtml = '<div class="fill-answer-section">';
+    answerHtml += '<div class="fill-answer-label">Correct answers:</div>';
+    allParsed.forEach((parsed, sIdx) => {
+      const boldText = parsed.text.replace(/\{([^|}]+)\|[^}]+\}/g, '<b>$1</b>').replace(/\n/g, '<br>');
+      answerHtml += `<div class="fill-answer-text" style="${isGroup && sIdx > 0 ? 'margin-top:6px;' : ''}">${boldText}</div>`;
+    });
+    answerHtml += '<div class="fill-answer-label" style="margin-top:10px;">Translation:</div>';
+    allParsed.forEach((parsed, sIdx) => {
+      answerHtml += `<div class="fill-answer-text" style="${isGroup && sIdx > 0 ? 'margin-top:4px;' : ''}">${parsed.translation.replace(/\n/g, '<br>')}</div>`;
+    });
+    answerHtml += `<div class="fill-score">${correctCount}/${totalBlanks} correct</div>`;
+    answerHtml += '</div>';
+
     answerEl.style.display = '';
-    answerEl.innerHTML = `
-      <div class="fill-answer-section">
-        <div class="fill-answer-label">Đáp án đúng:</div>
-        <div class="fill-answer-text">${text.replace(/\{([^|}]+)\|[^}]+\}/g, '<b>$1</b>').replace(/\n/g, '<br>')}</div>
-        <div class="fill-answer-label" style="margin-top:10px;">Bản dịch:</div>
-        <div class="fill-answer-text">${translation.replace(/\n/g, '<br>')}</div>
-        <div class="fill-score">${correct}/${blanks.length} từ đúng</div>
-      </div>`;
+    answerEl.innerHTML = answerHtml;
   } else {
     answerEl.style.display = 'none';
   }

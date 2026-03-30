@@ -1144,6 +1144,8 @@ const listenFillData = {
       ["What type of {job|n} are you {looking|v} for?\n(A) No, at ten a.m.\n(B) I {really|adv} like {working|v} with {computers|n}.\n(C) Just a résumé is {needed|v}.", "Bạn đang tìm kiếm loại công việc gì?\n(A) Không, lúc mười giờ sáng.\n(B) Tôi thực sự thích làm việc với máy tính.\n(C) Chỉ cần một bản lý lịch."]
     ],
 
+    part3Groups: [11, 7, 6, 6, 5, 5, 6, 6, 7, 7, 6, 6, 6],
+    part4Groups: [5, 5, 4, 4, 4, 5, 4, 4, 4, 5],
     part3: [
       ["Thank you so {much|adv} for {organizing|v} the {annual|adj} company {picnic|n}.", "Cảm ơn bạn rất nhiều vì đã tổ chức buổi dã ngoại hàng năm của công ty."],
       ["{Everybody|n} {seemed|v} to {enjoy|v} it.", "Mọi người dường như đều thích nó."],
@@ -1336,6 +1338,8 @@ const listenFillData = {
       ["Can you give me a {tour|n} of the {property|n} this {afternoon|n}?\n(A) Sorry, I won't have {time|n} until {tomorrow|adv}.\n(B) It has a very {modern|adj} {design|n}.\n(C) A {house|n} on Maple Street.", "Bạn có thể dẫn tôi tham quan bất động sản chiều nay không?\n(A) Xin lỗi, tôi không có thời gian cho đến ngày mai.\n(B) Nó có thiết kế rất hiện đại.\n(C) Một ngôi nhà trên đường Maple."],
       ["Who's {scheduled|v} to {test|v} the {product|n} today?\n(A) We're {waiting|v} for {confirmation|n}.\n(B) It's a great {album|n}, right?\n(C) About six weeks ago.", "Ai được lên lịch kiểm nghiệm sản phẩm hôm nay?\n(A) Chúng tôi đang đợi xác nhận.\n(B) Đó là album tuyệt vời, phải không?\n(C) Khoảng sáu tuần trước."]
     ],
+    part3Groups: [7, 8, 4, 7, 8, 8, 8, 6, 9, 7, 6, 8, 8],
+    part4Groups: [6, 8, 6, 8, 5, 7, 6, 8, 8, 6],
     part3: [
       ["Good {morning|n}, {captain|n}.", "Chào buổi sáng, thuyền trưởng."],
       ["We'll be {docking|v} at the {port|n} in Kolkata this {evening|n}, right?", "Chúng ta sẽ cập cảng ở Kolkata tối nay, đúng không?"],

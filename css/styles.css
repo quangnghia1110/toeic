@@ -473,6 +473,24 @@
   font-size: 0.9rem;
   color: #16a34a;
 }
+.fill-group-label {
+  font-size: 0.78rem;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e2e8f0;
+}
+.fill-group-sentence {
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: rgba(241,245,249,0.5);
+  border-radius: 8px;
+  line-height: 2;
+}
+.fill-group-sentence:last-child {
+  margin-bottom: 0;
+}
 
 @media (max-width: 768px) {
   .lf-body { flex-direction: column; }
