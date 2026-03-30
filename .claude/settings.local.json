@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(start \"\" \"e:/NQNghia/Tool/toeic/toeic_part5.html\")"
-    ]
-  }
-}

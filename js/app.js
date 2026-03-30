@@ -51,8 +51,52 @@ let selectedSources = new Set(['2026','study4','2024','2023']); // all selected 
 let showVi = false;
 let fullPool = [];
 
+let currentSection = null;
+
+/* HOME SCREEN */
+function enterSection(section) {
+  document.getElementById('homeView').style.display = 'none';
+  const part5Btns = document.querySelectorAll('.part5-only');
+  if (section === 'part5') {
+    currentSection = 'part5';
+    document.getElementById('topBar').style.display = '';
+    part5Btns.forEach(b => b.style.display = '');
+    initPart5();
+  } else if (section === 'listening') {
+    currentSection = 'listening';
+    document.getElementById('topBar').style.display = '';
+    part5Btns.forEach(b => b.style.display = 'none');
+    initListening();
+  }
+}
+
+function goHome() {
+  currentSection = null;
+  document.getElementById('topBar').style.display = 'none';
+  document.getElementById('mainView').style.display = 'none';
+  document.getElementById('historyView').style.display = 'none';
+  document.getElementById('historyReviewView').style.display = 'none';
+  document.getElementById('bookmarkView').style.display = 'none';
+  document.getElementById('vocabView').style.display = 'none';
+  document.getElementById('listenHome').style.display = 'none';
+  document.getElementById('listenPractice').style.display = 'none';
+  document.getElementById('listenFillView').style.display = 'none';
+  document.getElementById('listenHistoryView').style.display = 'none';
+  document.getElementById('listenHistoryReviewView').style.display = 'none';
+  document.getElementById('listenBookmarkView').style.display = 'none';
+  document.getElementById('homeView').style.display = '';
+  window.scrollTo(0, 0);
+}
+
 /* INIT */
 function init() {
+  // Show home screen on load
+  document.getElementById('homeView').style.display = '';
+  document.getElementById('topBar').style.display = 'none';
+  document.getElementById('mainView').style.display = 'none';
+}
+
+function initPart5() {
   allQuestions = [];
   const maxTest = Object.keys(testsRaw2026).length;
   for (let t = 1; t <= maxTest; t++) {
@@ -90,6 +134,9 @@ function toggleVi() {
       card.classList.toggle('show-vi', showVi);
     });
   }
+  // Apply to listening views
+  const listenQL = document.getElementById('listenQuestionList');
+  if (listenQL) listenQL.classList.toggle('show-vi', showVi);
 }
 
 /* TABS */
@@ -341,7 +388,11 @@ function confirmChange(yes) {
   stopFire(overlay);
   overlay.classList.remove('show');
   if (yes && pendingChange) applyAnswer(pendingChange.qIdx, pendingChange.optIdx);
+  if (yes && typeof pendingListenChange !== 'undefined' && pendingListenChange) {
+    applyListenAnswer(pendingListenChange.qId, pendingListenChange.optIdx);
+  }
   pendingChange = null;
+  if (typeof pendingListenChange !== 'undefined') pendingListenChange = null;
 }
 
 function applyAnswer(qIdx, optIdx) {
@@ -459,7 +510,7 @@ function updateTimerDisplay() {
 }
 
 /* SUBMIT */
-const incompleteAudio = new Audio('incomplete.mp3');
+const incompleteAudio = new Audio('audio/bg/incomplete.mp3');
 const clapAudio = new Audio('correct.mp3');
 const wrongAudio = new Audio('wrong.mp3');
 
@@ -635,8 +686,7 @@ function showHistoryList() {
 }
 
 function backToMain() {
-  setFilter('full');
-  window.scrollTo(0, 0);
+  goHome();
 }
 
 function closeHistoryView() { backToMain(); }
@@ -772,7 +822,7 @@ function closeHistoryReview() {
 }
 
 /* ========== BACKGROUND AUDIO ========== */
-const bgAudio = new Audio('audio.mp3');
+const bgAudio = new Audio('audio/bg/audio.mp3');
 bgAudio.loop = true;
 bgAudio.volume = 0.3;
 
@@ -1005,8 +1055,8 @@ document.addEventListener('mouseup', function(e) {
   const anchor = sel.anchorNode;
   if (!anchor) return;
   const parent = anchor.parentElement;
-  const card = parent ? parent.closest('.q-card, .vocab-card') : null;
-  if (!card && !parent.closest('.q-text, .option-en')) return;
+  const card = parent ? parent.closest('.q-card, .vocab-card, .listen-passage, .lf-sentence-box, .fill-answer-section') : null;
+  if (!card && !parent.closest('.q-text, .option-en, .listen-passage, .lf-sentence, .fill-answer-text, .fill-text')) return;
 
   // Detect which test this word belongs to
   pendingVocabTestNum = null;
