@@ -9,10 +9,9 @@ let listenState = {
   reviewMode: false
 };
 
-let listenCurrentTab = null; // e.g. "2024_1" or "2024_1_fill"
-
 function initListening() {
   document.getElementById('topBar').style.display = '';
+  document.getElementById('tabs').style.display = 'none';
   document.getElementById('listenHome').style.display = '';
   document.getElementById('listenPractice').style.display = 'none';
   document.getElementById('listenFillView').style.display = 'none';
@@ -20,42 +19,36 @@ function initListening() {
   document.getElementById('listenHistoryReviewView').style.display = 'none';
   document.getElementById('listenBookmarkView').style.display = 'none';
   document.getElementById('mainView').style.display = 'none';
-  renderListenTabs();
   renderListenHome();
-  // Auto-open Fill All of first test
-  const firstTestKey = Object.keys(listenTests)[0];
-  if (firstTestKey) startListenFill(firstTestKey, 'all');
-}
-
-function renderListenTabs() {
-  const tabsEl = document.getElementById('tabs');
-  tabsEl.style.display = '';
-  let html = '';
-  for (const [key, test] of Object.entries(listenTests)) {
-    const fillData = listenFillData[key];
-    const fAll = fillData ? (fillData.part1||[]).length + (fillData.part2||[]).length + (fillData.part3||[]).length + (fillData.part4||[]).length : 0;
-    const label = test.name.replace('TOEIC 2024 - ', '');
-    html += `<div class="tab-row">`;
-    html += `<span class="tab-label">${label}</span>`;
-    html += `<div class="tab-chips">`;
-    // Fill chips
-    if (fAll > 0) {
-      const f1 = (fillData.part1||[]).length, f2 = (fillData.part2||[]).length;
-      const f3 = (fillData.part3||[]).length, f4 = (fillData.part4||[]).length;
-      if (f1) html += `<span class="tab-chip listen-fill-chip" onclick="startListenFill('${key}','part1')">Fill P1</span>`;
-      if (f2) html += `<span class="tab-chip listen-fill-chip" onclick="startListenFill('${key}','part2')">Fill P2</span>`;
-      if (f3) html += `<span class="tab-chip listen-fill-chip" onclick="startListenFill('${key}','part3')">Fill P3</span>`;
-      if (f4) html += `<span class="tab-chip listen-fill-chip" onclick="startListenFill('${key}','part4')">Fill P4</span>`;
-      html += `<span class="tab-chip listen-fill-chip" onclick="startListenFill('${key}','all')">Fill All</span>`;
-    }
-    html += `</div></div>`;
-  }
-  tabsEl.innerHTML = html;
+  updateListenBookmarkCount();
 }
 
 function renderListenHome() {
   const container = document.getElementById('listenTestList');
-  container.innerHTML = '';
+  let html = '';
+  for (const [key, test] of Object.entries(listenTests)) {
+    const fillData = listenFillData[key];
+    const f1 = fillData && fillData.part1 ? fillData.part1.length : 0;
+    const f2 = fillData && fillData.part2 ? fillData.part2.length : 0;
+    const f3 = fillData && fillData.part3 ? fillData.part3.length : 0;
+    const f4 = fillData && fillData.part4 ? fillData.part4.length : 0;
+    const fAll = f1 + f2 + f3 + f4;
+
+    html += `
+      <div class="listen-test-card glass">
+        <div class="listen-test-name">${test.name}</div>
+        <div class="listen-test-info">Listen & Fill</div>
+        ${fAll > 0 ? `
+        <div class="listen-parts-row">
+          ${f1 > 0 ? `<span class="listen-part-chip listen-part-fill" onclick="startListenFill('${key}','part1')">Part 1 (${f1})</span>` : ''}
+          ${f2 > 0 ? `<span class="listen-part-chip listen-part-fill" onclick="startListenFill('${key}','part2')">Part 2 (${f2})</span>` : ''}
+          ${f3 > 0 ? `<span class="listen-part-chip listen-part-fill" onclick="startListenFill('${key}','part3')">Part 3 (${f3})</span>` : ''}
+          ${f4 > 0 ? `<span class="listen-part-chip listen-part-fill" onclick="startListenFill('${key}','part4')">Part 4 (${f4})</span>` : ''}
+          <span class="listen-part-chip listen-part-fill" onclick="startListenFill('${key}','all')">All (${fAll})</span>
+        </div>` : ''}
+      </div>`;
+  }
+  container.innerHTML = html;
 }
 
 function selectListenTest(testKey) {
@@ -111,7 +104,6 @@ function startListenPart(testKey, part) {
 
   document.getElementById('listenHome').style.display = 'none';
   document.getElementById('listenPractice').style.display = 'flex';
-  document.getElementById('tabs').style.display = 'none';
   renderListenAudio();
   renderListenQuestions();
   renderListenGrid();
@@ -395,7 +387,6 @@ function backToListenHome() {
   document.getElementById('listenHistoryReviewView').style.display = 'none';
   document.getElementById('listenBookmarkView').style.display = 'none';
   document.getElementById('listenHome').style.display = '';
-  document.getElementById('tabs').style.display = '';
   updateListenBookmarkCount();
   window.scrollTo(0, 0);
 }
@@ -464,7 +455,6 @@ function startListenFill(testKey, part) {
   document.getElementById('listenHome').style.display = 'none';
   document.getElementById('listenPractice').style.display = 'none';
   document.getElementById('listenFillView').style.display = '';
-  document.getElementById('tabs').style.display = 'none';
   document.getElementById('lfTestName').textContent = data.name || 'TEST';
 
   renderFillSentence();
@@ -784,7 +774,6 @@ function showListenHistory() {
   document.getElementById('listenFillView').style.display = 'none';
   document.getElementById('listenHistoryReviewView').style.display = 'none';
   document.getElementById('listenBookmarkView').style.display = 'none';
-  document.getElementById('tabs').style.display = 'none';
   document.getElementById('listenHistoryView').style.display = 'block';
   renderListenHistory();
   window.scrollTo(0, 0);
@@ -962,14 +951,16 @@ function toggleListenBookmark(testKey, qId, btnEl) {
 
 function updateListenBookmarkCount() {
   const bm = getListenBookmarks();
-  const el = document.getElementById('bookmarkCount');
-  if (!el) return;
-  if (bm.length > 0) {
-    el.textContent = bm.length;
-    el.style.display = '';
-  } else {
-    el.style.display = 'none';
-  }
+  const els = [document.getElementById('listenBookmarkCount'), document.getElementById('listenBookmarkCountHome')];
+  els.forEach(el => {
+    if (!el) return;
+    if (bm.length > 0) {
+      el.textContent = bm.length;
+      el.style.display = '';
+    } else {
+      el.style.display = 'none';
+    }
+  });
 }
 
 function showListenBookmarkView() {
@@ -978,7 +969,6 @@ function showListenBookmarkView() {
   document.getElementById('listenFillView').style.display = 'none';
   document.getElementById('listenHistoryView').style.display = 'none';
   document.getElementById('listenHistoryReviewView').style.display = 'none';
-  document.getElementById('tabs').style.display = 'none';
   document.getElementById('listenBookmarkView').style.display = 'flex';
   renderListenBookmarkView();
   window.scrollTo(0, 0);

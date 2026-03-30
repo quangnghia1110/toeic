@@ -34,7 +34,7 @@
     <button class="home-back-btn" onclick="goHome()">← Home</button>
     <h1 style="cursor:pointer;" onclick="goHome()">TOEIC Practice</h1>
     <div style="display:flex;align-items:center;gap:8px;">
-      <label class="translate-toggle part5-only">
+      <label class="translate-toggle">
         <input type="checkbox" id="viToggle" onchange="toggleVi()">
         <span class="tgl-track"></span>
         Translate
@@ -54,9 +54,9 @@
           </div>
         </div>
       </div>
-      <button class="history-btn part5-only" onclick="showHistoryList()">History</button>
-      <button class="history-btn part5-only" onclick="showBookmarkView()">Bookmark <span id="bookmarkCount" class="bookmark-count" style="display:none">0</span></button>
-      <button class="history-btn part5-only" onclick="showVocabView()">Vocab <span id="vocabCount" class="bookmark-count" style="display:none">0</span></button>
+      <button class="history-btn" onclick="showHistoryList()">History</button>
+      <button class="history-btn" onclick="showBookmarkView()">Bookmark <span id="bookmarkCount" class="bookmark-count" style="display:none">0</span></button>
+      <button class="history-btn" onclick="showVocabView()">Vocab <span id="vocabCount" class="bookmark-count" style="display:none">0</span></button>
       <span id="headerInfo" style="font-size:0.75rem;color:#64748b;font-weight:500;"></span>
     </div>
   </div>
@@ -481,6 +481,9 @@
 
 <!-- LISTENING HOME -->
 <div id="listenHome" style="display:none;max-width:900px;margin:0 auto;padding:16px;">
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+    <h2 style="font-size:1.1rem;font-weight:700;color:#1e293b;">Listening Practice</h2>
+  </div>
   <div id="listenTestList"></div>
 </div>
 
@@ -500,6 +503,10 @@
     <div class="sidebar-card glass action-btns">
       <button class="action-btn submit" id="listenSubmitBtn" onclick="submitListenTest()">Submit</button>
       <button class="action-btn new-test" onclick="resetListenTest()">Reset</button>
+    </div>
+    <div class="sidebar-card glass action-btns">
+      <button class="history-btn" onclick="showListenHistory()" style="width:100%;">History</button>
+      <button class="history-btn" onclick="showListenBookmarkView()" style="width:100%;">Bookmark <span id="listenBookmarkCount" class="bookmark-count" style="display:none">0</span></button>
     </div>
     <div class="sidebar-card glass">
       <h3>Questions</h3>

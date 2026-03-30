@@ -634,20 +634,6 @@ body {
 }
 .tab:hover { background: rgba(59,130,246,0.1); color: #1e293b; }
 .tab.active { background: rgba(59,130,246,0.12); border-color: #3b82f6; color: #2563eb; }
-.tab-label {
-  font-size: 0.72rem; font-weight: 700; color: #1e293b;
-  padding: 5px 8px; white-space: nowrap; min-width: 50px;
-}
-.tab-chips { display: flex; gap: 3px; flex-wrap: wrap; }
-.tab-chip {
-  padding: 5px 10px; border-radius: 8px; cursor: pointer;
-  font-size: 0.7rem; font-weight: 600; white-space: nowrap;
-  transition: all 0.25s; border: 1px solid transparent;
-}
-.listen-fill-chip {
-  background: rgba(139,92,246,0.08); color: #7c3aed;
-}
-.listen-fill-chip:hover { background: rgba(139,92,246,0.18); }
 .main {
   display: flex; gap: 14px; padding: 10px 16px;
   max-width: 1400px; margin: 0 auto; align-items: flex-start;

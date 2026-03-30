@@ -56,16 +56,13 @@ let currentSection = null;
 /* HOME SCREEN */
 function enterSection(section) {
   document.getElementById('homeView').style.display = 'none';
-  const part5Btns = document.querySelectorAll('.part5-only');
   if (section === 'part5') {
     currentSection = 'part5';
     document.getElementById('topBar').style.display = '';
-    part5Btns.forEach(b => b.style.display = '');
     initPart5();
   } else if (section === 'listening') {
     currentSection = 'listening';
     document.getElementById('topBar').style.display = '';
-    part5Btns.forEach(b => b.style.display = 'none');
     initListening();
   }
 }
