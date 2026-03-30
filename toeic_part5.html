@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Part 5 Practice</title>
+<link rel="icon" type="image/jpg" href="favicon.jpg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="header">
+    <h1 style="cursor:pointer;" onclick="backToMain()">TOEIC Part 5 Practice</h1>
+    <div style="display:flex;align-items:center;gap:8px;">
+      <label class="translate-toggle">
+        <input type="checkbox" id="viToggle" onchange="toggleVi()">
+        <span class="tgl-track"></span>
+        Translate
+      </label>
+      <div style="position:relative;display:inline-block;" id="musicWrapper">
+        <button class="history-btn" id="bgAudioBtn" onclick="toggleBgAudio()" title="Background Music">🔇 Music</button>
+        <button class="history-btn" onclick="toggleMusicPanel()" title="Music Controls" style="padding:4px 6px;">▼</button>
+        <div id="musicPanel" style="display:none;position:absolute;top:100%;right:0;margin-top:6px;background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:10px;box-shadow:0 4px 20px rgba(0,0,0,0.12);padding:10px 12px;min-width:220px;z-index:500;">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;">
+            <span id="audioCurrentTime" style="font-size:0.68rem;color:#475569;font-variant-numeric:tabular-nums;min-width:34px;">0:00</span>
+            <input type="range" id="audioSeek" min="0" max="100" value="0" step="0.1" style="flex:1;-webkit-appearance:none;appearance:none;height:5px;border-radius:3px;background:linear-gradient(90deg,#3b82f6 0%,#e2e8f0 0%);outline:none;cursor:pointer;" oninput="seekAudio(this)">
+            <span id="audioDuration" style="font-size:0.68rem;color:#94a3b8;font-variant-numeric:tabular-nums;min-width:34px;text-align:right;">0:00</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span style="font-size:0.65rem;color:#94a3b8;">Vol</span>
+            <input type="range" id="audioVolume" min="0" max="1" step="0.05" value="0.3" style="flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:linear-gradient(90deg,#3b82f6 30%,#e2e8f0 30%);outline:none;cursor:pointer;" oninput="changeVolume(this)">
+          </div>
+        </div>
+      </div>
+      <button class="history-btn" onclick="showHistoryList()">History</button>
+      <button class="history-btn" onclick="showBookmarkView()">Bookmark <span id="bookmarkCount" class="bookmark-count" style="display:none">0</span></button>
+      <button class="history-btn" onclick="showVocabView()">Vocab <span id="vocabCount" class="bookmark-count" style="display:none">0</span></button>
+      <span id="headerInfo" style="font-size:0.75rem;color:#64748b;font-weight:500;"></span>
+    </div>
+  </div>
+  <div class="tabs" id="tabs"></div>
+</div>
+
+<!-- HISTORY LIST VIEW -->
+<div id="historyView" style="max-width:1400px;margin:0 auto;padding:16px;display:none;">
+  <h2 style="font-size:1rem;font-weight:700;color:#1e293b;margin-bottom:12px;">Test History</h2>
+  <div id="historyList" class="history-list"></div>
+</div>
+
+<!-- HISTORY REVIEW VIEW (like main screen) -->
+<div class="main" id="historyReviewView" style="display:none;">
+  <div class="left" id="hrQuestionList"></div>
+  <div class="right">
+    <div class="sidebar-card glass">
+      <h3 style="margin:0;" id="hrTitle">Review</h3>
+      <div class="progress-text" id="hrProgress" style="margin-top:6px;"></div>
+    </div>
+    <div class="sidebar-card glass">
+      <h3>Questions</h3>
+      <div class="q-grid" id="hrGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- BOOKMARK VIEW -->
+<div class="main" id="bookmarkView" style="display:none;">
+  <div class="left" id="bmQuestionList"></div>
+  <div class="right">
+    <div class="sidebar-card glass">
+      <h3 style="margin:0;">Bookmarked Questions</h3>
+      <div class="progress-text" id="bmProgress" style="margin-top:6px;"></div>
+    </div>
+    <div class="sidebar-card glass">
+      <h3>Questions</h3>
+      <div class="q-grid" id="bmGrid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- VOCAB VIEW -->
+<div id="vocabView" class="fc-view" style="display:none;">
+  <!-- VOCAB INDEX -->
+  <div id="vocabIndex">
+    <div class="fc-header">
+      <div class="fc-title-row">
+        <h2 class="fc-title">My Vocabulary</h2>
+        <span class="fc-count" id="fcCountIndex">0 words</span>
+      </div>
+    </div>
+    <div class="vi-test-list" id="viTestList"></div>
+    <button class="fc-clear-all" onclick="clearAllVocab()" style="margin-top:16px;">Clear All Vocabulary</button>
+  </div>
+
+  <!-- VOCAB ACTIVITY VIEWS (shared header + mode bar) -->
+  <div id="vocabActivity" style="display:none;">
+    <div class="fc-header">
+      <div class="fc-title-row">
+        <button class="fc-back-btn" onclick="showVocabIndex()" title="Back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <h2 class="fc-title" id="vaTitle">My Vocabulary</h2>
+        <span class="fc-count" id="vaCount">0 words</span>
+      </div>
+    </div>
+
+    <!-- MODE BAR -->
+    <div class="va-mode-bar">
+      <button class="va-mode-btn active" data-mode="flashcards" onclick="switchVocabMode('flashcards')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21" stroke="currentColor" stroke-width="2"/><line x1="12" y1="17" x2="12" y2="21" stroke="currentColor" stroke-width="2"/></svg>
+        Flashcards
+      </button>
+      <button class="va-mode-btn" data-mode="learn" onclick="switchVocabMode('learn')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10"/><path d="M12 2a10 10 0 0 0-10 10"/><path d="M12 2v4"/><circle cx="12" cy="12" r="3"/></svg>
+        Learn
+      </button>
+      <button class="va-mode-btn" data-mode="test" onclick="switchVocabMode('test')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        Test
+      </button>
+      <button class="va-mode-btn" data-mode="match" onclick="switchVocabMode('match')">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Match
+      </button>
+    </div>
+
+    <!-- PANEL: FLASHCARDS -->
+    <div id="vaFlashcards" class="va-panel">
+      <div class="fc-wrapper">
+        <div class="fc-card" id="fcCard" onclick="flipCard()">
+          <div class="fc-card-toolbar">
+            <button class="fc-card-tool-btn" onclick="event.stopPropagation();fcSpeak()" title="Listen">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+            </button>
+            <button class="fc-card-tool-btn" id="fcStarBtn" onclick="event.stopPropagation();fcToggleStar()" title="Star">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </button>
+          </div>
+          <div class="fc-side fc-front" id="fcFront"></div>
+          <div class="fc-side fc-back" id="fcBack"></div>
+          <div class="fc-card-label fc-label-front" id="fcLabelFront">ENGLISH</div>
+          <div class="fc-card-label fc-label-back" id="fcLabelBack">TIẾNG VIET</div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="fc-arrow" onclick="fcPrev()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="fc-progress-bar"><div class="fc-progress-fill" id="fcProgressFill"></div></div>
+        <span class="fc-progress" id="fcProgress">1 / 1</span>
+        <button class="fc-arrow" onclick="fcNext()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="fc-actions">
+        <div class="fc-action-group">
+          <button class="fc-act" onclick="fcShuffle()" title="Shuffle">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+            <span>Shuffle</span>
+          </button>
+          <button class="fc-act" onclick="fcEdit()" title="Edit meaning">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+            <span>Edit</span>
+          </button>
+          <button class="fc-act fc-act-danger" onclick="fcDelete()" title="Delete word">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <span>Delete</span>
+          </button>
+        </div>
+        <div class="fc-action-group">
+          <button class="fc-act" onclick="fcFlipMode('en')" id="fcModeEn" title="EN front"><span>EN → VI</span></button>
+          <button class="fc-act" onclick="fcFlipMode('vi')" id="fcModeVi" title="VI front"><span>VI → EN</span></button>
+        </div>
+      </div>
+      <div class="fc-hint">Click card to flip · Use ← → to navigate</div>
+    </div>
+
+    <!-- PANEL: LEARN (card list) -->
+    <div id="vaLearn" class="va-panel" style="display:none;">
+      <div class="cl-toolbar">
+        <div class="cl-search-wrap">
+          <svg class="cl-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="cl-search" id="clSearch" placeholder="Search..." oninput="filterCardList()">
+        </div>
+        <div class="cl-toolbar-actions">
+          <button class="cl-tool-btn" id="clStarFilter" onclick="toggleStarFilter()" title="Show starred only">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </button>
+          <button class="cl-tool-btn active" id="clHideMeaning" onclick="toggleHideMeaning()" title="Hide/Show meanings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="cl-list" id="clList"></div>
+    </div>
+
+    <!-- PANEL: TEST -->
+    <div id="vaTest" class="va-panel" style="display:none;">
+      <div class="va-test-start">
+        <div class="va-test-section">
+          <div class="quiz-mode-section-label">Quiz Type</div>
+          <div class="va-test-chips">
+            <button class="quiz-test-chip active" id="vaTestTypeChoice" onclick="selectVaTestType('choice')">Multiple Choice</button>
+            <button class="quiz-test-chip" id="vaTestTypeTyping" onclick="selectVaTestType('typing')">Typing</button>
+          </div>
+        </div>
+        <div class="va-test-section">
+          <div class="quiz-mode-section-label">Direction</div>
+          <div class="quiz-mode-buttons" style="max-width:360px;margin:0 auto;">
+            <button class="quiz-mode-btn" onclick="launchTestFromActivity('en')">
+              <span class="quiz-mode-icon">🇬🇧</span>
+              <div class="quiz-mode-btn-text">
+                <span class="quiz-mode-label">EN → VI</span>
+                <span class="quiz-mode-hint">See English, answer Vietnamese</span>
+              </div>
+            </button>
+            <button class="quiz-mode-btn" onclick="launchTestFromActivity('vi')">
+              <span class="quiz-mode-icon">🇻🇳</span>
+              <div class="quiz-mode-btn-text">
+                <span class="quiz-mode-label">VI → EN</span>
+                <span class="quiz-mode-hint">See Vietnamese, answer English</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: MATCH -->
+    <div id="vaMatch" class="va-panel" style="display:none;">
+      <div class="match-header">
+        <span class="match-timer" id="matchTimer">0.0</span>
+        <button class="match-restart" onclick="startMatch()" title="Restart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+      </div>
+      <div class="match-grid" id="matchGrid"></div>
+      <div class="match-complete" id="matchComplete" style="display:none;">
+        <div style="font-size:2rem;margin-bottom:8px;">🎉</div>
+        <div class="match-complete-time" id="matchCompleteTime">0.0s</div>
+        <p style="color:#64748b;margin:8px 0 16px;">All pairs matched!</p>
+        <button class="quiz-mode-btn" onclick="startMatch()" style="justify-content:center;max-width:200px;margin:0 auto;">
+          <span>Play Again</span>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- /vocabActivity -->
+</div>
+
+<!-- MAIN VIEW -->
+<div class="main" id="mainView">
+  <div class="left" id="questionList"></div>
+  <div class="right">
+    <div class="sidebar-card glass">
+      <h3>Timer</h3>
+      <div class="timer-display" id="timerDisplay">00:00</div>
+      <div class="timer-controls">
+        <input type="number" id="timerInput" value="75" min="1" max="180" title="Minutes">
+        <button class="timer-btn start" id="timerStartBtn" onclick="toggleTimer()">Start</button>
+        <button class="timer-btn reset-timer" onclick="resetTimer()">Reset</button>
+      </div>
+    </div>
+    <div class="sidebar-card glass slider-card" id="sliderCard">
+      <h3>Number of Questions</h3>
+      <div class="slider-row">
+        <input type="range" id="qSlider" min="5" max="195" step="5" value="195" oninput="onSliderChange(this)">
+        <input type="number" class="slider-val" id="sliderVal" value="195" min="5" oninput="onSliderInputChange(this)">
+      </div>
+    </div>
+    <div class="sidebar-card glass">
+      <h3>Progress</h3>
+      <div class="progress-text" id="progressText">0 / 0</div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+    <div class="sidebar-card glass action-btns">
+      <button class="action-btn submit" id="submitBtn" onclick="submitTest()">Submit</button>
+      <button class="action-btn review" id="reviewBtn" onclick="toggleReview()" style="display:none">Review Answers</button>
+      <button class="action-btn random" onclick="goRandom()">Shuffle</button>
+      <button class="action-btn new-test" onclick="resetTest()">Reset Test</button>
+    </div>
+    <div class="sidebar-card glass">
+      <h3>Questions</h3>
+      <div class="q-grid" id="qGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="celebOverlay">
+  <canvas id="confettiCanvas"></canvas>
+  <div class="celeb-content">
+    <div class="celeb-emoji">🎉</div>
+    <h2 class="celeb-title">Hoan hô Tẻn Tẻn đã cố gắng làm bài!</h2>
+    <p class="celeb-sub">Giỏi lắm, tiếp tục phát huy nha~ 💪</p>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal glass">
+    <h2>Test Result</h2>
+    <div class="result-stats">
+      <div class="stat-box good"><div class="val" id="correctCount">0</div><div class="label">Correct</div></div>
+      <div class="stat-box bad"><div class="val" id="wrongCount">0</div><div class="label">Wrong</div></div>
+      <div class="stat-box"><div class="val" id="totalCount">0</div><div class="label">Total</div></div>
+      <div class="stat-box"><div class="val" id="pctScore">0%</div><div class="label">Accuracy</div></div>
+    </div>
+    <div class="modal-btns">
+      <button class="review-btn" onclick="closeModal(); toggleReview();">Review</button>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="ct-title">EM ĐÃ CHẮC CHƯA, NHẮC 1 TỶ LẦN RỒI ĐÓ</div>
+    <div class="ct-text" id="ctText"></div>
+    <div class="ct-btns">
+      <button class="ct-btn ct-no" onclick="confirmChange(false)">Em nghe anh, hăm đổi</button>
+      <button class="ct-btn ct-yes" onclick="confirmChange(true)">Em kệ anh, em đổi</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="customDialogOverlay">
+  <div class="custom-dialog glass">
+    <div class="cd-title" id="cdTitle"></div>
+    <div class="cd-body" id="cdBody"></div>
+    <input type="text" class="cd-input" id="cdInput" style="display:none;" onkeydown="if(event.key==='Enter')cdResolve(true)">
+    <div class="cd-btns">
+      <button class="cd-btn cd-cancel" id="cdCancelBtn" onclick="cdResolve(false)">Cancel</button>
+      <button class="cd-btn cd-ok" id="cdOkBtn" onclick="cdResolve(true)">OK</button>
+    </div>
+  </div>
+</div>
+
+<div id="vocabPopup" class="vocab-popup" style="display:none;">
+  <span id="vocabPopupWord" style="font-weight:600;"></span>
+  <button onclick="showVocabMeaningInput()">+ Vocab</button>
+</div>
+
+<div class="modal-overlay" id="vocabInputOverlay">
+  <div class="modal glass" style="max-width:380px;">
+    <h2 style="font-size:1rem;margin-bottom:4px;">Add Vocabulary</h2>
+    <div id="vocabInputWord" style="font-size:1.1rem;font-weight:700;color:#3b82f6;margin-bottom:12px;"></div>
+    <input type="text" id="vocabMeaningInput" placeholder="Vietnamese meaning..." style="width:100%;padding:10px 14px;border:1px solid #e2e8f0;border-radius:8px;font-size:0.9rem;outline:none;margin-bottom:12px;" onkeydown="if(event.key==='Enter')confirmAddVocab()">
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button class="ct-btn ct-no" onclick="closeVocabInput()" style="padding:6px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:600;">Cancel</button>
+      <button class="ct-btn ct-yes" onclick="confirmAddVocab()" style="padding:6px 16px;border-radius:8px;border:none;cursor:pointer;font-weight:600;background:#3b82f6;color:#fff;">Add</button>
+    </div>
+  </div>
+</div>
+
+<div id="quizModeOverlay" class="modal-overlay">
+  <div class="quiz-mode-select glass">
+    <button class="quiz-close" onclick="closeQuizModeSelect()">✕</button>
+    <h2 class="quiz-mode-title">Quiz</h2>
+
+    <div class="quiz-mode-section">
+      <div class="quiz-mode-section-label">Select Words</div>
+      <div class="quiz-mode-test-list" id="quizTestList"></div>
+    </div>
+
+    <div class="quiz-mode-section">
+      <div class="quiz-mode-section-label">Quiz Type</div>
+      <div class="quiz-mode-test-list">
+        <button class="quiz-test-chip active" id="quizTypeChoice" onclick="selectQuizType('choice', this)">Multiple Choice</button>
+        <button class="quiz-test-chip" id="quizTypeTyping" onclick="selectQuizType('typing', this)">Typing</button>
+      </div>
+    </div>
+
+    <div class="quiz-mode-section">
+      <div class="quiz-mode-section-label">Choose Direction</div>
+      <div class="quiz-mode-buttons">
+        <button class="quiz-mode-btn" onclick="launchQuiz('en')">
+          <span class="quiz-mode-icon">🇬🇧</span>
+          <div class="quiz-mode-btn-text">
+            <span class="quiz-mode-label">EN → VI</span>
+            <span class="quiz-mode-hint">See English, choose Vietnamese</span>
+          </div>
+        </button>
+        <button class="quiz-mode-btn" onclick="launchQuiz('vi')">
+          <span class="quiz-mode-icon">🇻🇳</span>
+          <div class="quiz-mode-btn-text">
+            <span class="quiz-mode-label">VI → EN</span>
+            <span class="quiz-mode-hint">See Vietnamese, choose English</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="quizOverlay" class="modal-overlay">
+  <div class="quiz-container glass">
+    <div class="quiz-header">
+      <button class="quiz-close" onclick="closeQuiz()">✕</button>
+      <div class="quiz-score-inline">
+        <span class="quiz-score-correct" id="quizScoreCorrectInline">0</span>
+        <span class="quiz-score-wrong" id="quizScoreWrongInline">0</span>
+      </div>
+      <span class="quiz-progress" id="quizProgress">1/20</span>
+    </div>
+    <div class="quiz-label" id="quizLabel">Term</div>
+    <div class="quiz-term-row">
+      <div class="quiz-term" id="quizTerm"></div>
+      <button class="quiz-speak-btn" onclick="speakQuizTerm()" title="Listen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+    </div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="quiz-feedback" id="quizFeedback" style="display:none;"></div>
+    <div class="quiz-bottom">
+      <button class="quiz-skip" onclick="skipQuiz()">Skip</button>
+      <button class="quiz-next" id="quizNextBtn" onclick="nextQuiz()" style="display:none;">Next</button>
+    </div>
+  </div>
+</div>
+
+<div id="quizTypingOverlay" class="modal-overlay">
+  <div class="quiz-container glass">
+    <div class="quiz-header">
+      <button class="quiz-close" onclick="closeQuizTyping()">✕</button>
+      <div class="quiz-score-inline">
+        <span class="quiz-score-correct" id="qtScoreCorrect">0</span>
+        <span class="quiz-score-wrong" id="qtScoreWrong">0</span>
+      </div>
+      <span class="quiz-progress" id="qtProgress">1/20</span>
+    </div>
+    <div class="quiz-label" id="qtLabel">Term</div>
+    <div class="quiz-term-row">
+      <div class="quiz-term" id="qtTerm"></div>
+      <button class="quiz-speak-btn" onclick="speakQtTerm()" title="Listen">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
+      </button>
+    </div>
+    <div class="quiz-answer-section">
+      <input type="text" id="qtInput" class="quiz-input" placeholder="Type your answer..." onkeydown="if(event.key==='Enter')checkQuizTyping()">
+    </div>
+    <div class="quiz-feedback" id="qtFeedback" style="display:none;"></div>
+    <div class="quiz-bottom">
+      <button class="quiz-skip" onclick="skipQuizTyping()">Skip</button>
+      <button class="quiz-next" id="qtNextBtn" onclick="checkQuizTyping()">Check</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="quizResultOverlay">
+  <div class="modal glass" style="max-width:380px;text-align:center;">
+    <div style="font-size:2.5rem;margin-bottom:8px;">🎉</div>
+    <h2 style="font-size:1.1rem;">Quiz Result</h2>
+    <div style="display:flex;gap:16px;justify-content:center;margin:16px 0;">
+      <div><div style="font-size:1.8rem;font-weight:800;color:#22c55e;" id="quizCorrectCount">0</div><div style="font-size:0.75rem;color:#64748b;">Correct</div></div>
+      <div><div style="font-size:1.8rem;font-weight:800;color:#ef4444;" id="quizWrongCount">0</div><div style="font-size:0.75rem;color:#64748b;">Wrong</div></div>
+      <div><div style="font-size:1.8rem;font-weight:800;color:#3b82f6;" id="quizScorePct">0%</div><div style="font-size:0.75rem;color:#64748b;">Score</div></div>
+    </div>
+    <button onclick="closeQuizResult()" style="background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:8px 28px;font-weight:700;cursor:pointer;font-size:0.85rem;">Close</button>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

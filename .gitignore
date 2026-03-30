@@ -1,0 +1,15 @@
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Salesforce DX (not needed for this project)
+.sfdx/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Large audio files (optional - uncomment if you don't want to push them)
+# audio.mp3
