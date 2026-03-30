@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "TOEIC Part 5 Practice Tool",
   "scripts": {
-    "start": "serve -s . -l $PORT"
+    "start": "serve . -l $PORT"
   },
   "dependencies": {
     "serve": "^14.2.0"
